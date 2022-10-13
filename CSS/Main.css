@@ -1,0 +1,24 @@
+body {
+	background: red;
+}
+
+.Navbar {
+	background-color: lavender;
+	padding: 5px;
+	border: 1px solid black;
+	margin-bottom: 10px;
+}
+
+.Navbar-links a {
+	padding-right: 10px;
+	border-right: 1px solid black;
+}
+
+.Navbar-links a:link {
+	text-decoration: none;
+}
+
+.Navbar-links a:hover{
+	cursor: pointer;
+	color: purple;
+}

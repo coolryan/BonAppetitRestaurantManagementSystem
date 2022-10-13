@@ -1,0 +1,21 @@
+<!--
+Filename: Header.php
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: Oct. 11, 2022
+Purpose: To create navigation bar for restaurant mangement system
+-->
+<!-- Create Navigation bar-->
+<div class="Navbar">
+	<div class="Navbar-links">
+		<header>
+			<a href="Welcome.php">Home</a>
+			<a href="">Restaurant Menu</a>
+			<a href="">Inventory</a>
+			<a href="">Profile</a>
+			<a href="">Staff</a>
+			<a href="">Reservation/Schedule</a>
+		</header>
+	</div>
+</div>
