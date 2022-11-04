@@ -19,17 +19,13 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 	<?php
 		// AT TOP
 		require_once("Header.php");
+		require_once("utils.php");
+		$logged_in = isLoggedIn();
 
 		// include our connect
 		//require_once("Connect.php")
 
-		// // check to see if there is a user already logged in
-		// session_start();
-		// if (isset($_SESSION['username']) && isset($_SESSION['userID'])) {
-		// 	$LOGGED_IN = true;
-		// }
-		// else
-		// 	$LOGGED_IN = false;
+		
 
 		// // display the user aware navigation links
 		// if ($LOGGED_IN == true) {

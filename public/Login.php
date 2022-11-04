@@ -25,9 +25,10 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 			
 			// include our connect script
 			require_once("Connect.php");
-
+			require_once("utils.php");
+			checkAndStartSession();
 			// check to see if there is a user already logged in, if so redirect them
-			session_start();
+			
 			if (!empty($_SESSION['email'])) {
 				// redirect the user to the Home page
 				header("Location: Welcome.php");

@@ -16,8 +16,9 @@ Purpose: To allow the owner of Bon Appetit Paris to leave the site
 <body>
 	<?php  
 		// verify the user is logged in
-		session_start();
-		if (isset($_SESSION['username']) && isset($_SESSION['userID'])) {
+		require_once("utils.php");
+		checkAndStartSession();
+		if (isset($_SESSION['email'])) {
 			// IF YOU ARE HERE THEN THE USER IS LOGGED IN, AND WE CAN LOG THEM OUT
 			session_destroy();
 
