@@ -28,14 +28,14 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 
 			// check to see if there is a user already logged in, if so redirect them
 			session_start();
-			if (isset($_SESSION['email'])) {
+			if (!empty($_SESSION['email'])) {
 				// redirect the user to the Home page
 				header("Location: Welcome.php");
 			}
 
 			// check to see if the user clciked the login buttion
 			
-			if (empty($_POST['loginBtn'])) {
+			if (!empty($_POST['loginBtn'])) {
 				// get the form data for processing
 				$email = $_POST['email'];
 				$passwd = $_POST['passwd'];
@@ -61,7 +61,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 								mysqli_query($conn, $qry);
 
 								// IF YOU GET HERE THE USER CAN LOGIN
-								$_SESSION['email'] = $record['em'];
+								$_SESSION['email'] = $record['email'];
 								$_SESSION['userID'] = $record['id'];
 
 								$success = true;
@@ -95,8 +95,8 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 	<div class="container2">
 		<form action="Login.php" method="POST" name="loginForm">
 			<table>
-				<tr><td>username: <font color="red">*</font></td></tr>
-				<tr><td><input type="text" name="username" value="" size="35"></td></tr>
+				<tr><td>Email: <font color="red">*</font></td></tr>
+				<tr><td><input type="text" name="email" value="" size="35"></td></tr>
 				<tr><td>Password: <font color="red">*</font></td></tr>
 				<tr><td><input type="password" name="passwd" value="" size="35"></td></tr>
 				<tr><td>
