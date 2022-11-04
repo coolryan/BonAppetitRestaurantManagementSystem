@@ -16,10 +16,15 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 </head>
 <body>
 	<h1>Bon Appetit Paris Restaurant Mangement system - Login</h1>
+
+	<?php
+	require_once("Header.php");
+	?>
 	<div class="container1">
 		<?php
+			
 			// include our connect script
-			require_once("Conncet.php");
+			require_once("Connect.php");
 
 			// check to see if there is a user already logged in, if so redirect them
 			session_start();
@@ -29,7 +34,8 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 			}
 
 			// check to see if the user clciked the login buttion
-			if (isset($_POST['loginBtn'])) {
+			
+			if (empty($_POST['loginBtn'])) {
 				// get the form data for processing
 				$email = $_POST['email'];
 				$passwd = $_POST['passwd'];
@@ -50,7 +56,9 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 								// upadte the last_login tracker
 								$last_login = time();
 
-								mysqli_query($conn,, "UPDATE users SET last_login='{$last_login}' WHERE id="{$record['id']}"");
+								$user_id = $record['id'];
+								$qry = "UPDATE users SET last_login='{$last_login}' WHERE id='{$user_id}'";
+								mysqli_query($conn, $qry);
 
 								// IF YOU GET HERE THE USER CAN LOGIN
 								$_SESSION['email'] = $record['em'];

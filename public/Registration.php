@@ -38,8 +38,14 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 			$passwd_again = $_POST['confirm_password'];
 		}
 
+		// Only the owner can register. Everyone else should be added by the owner or manager
+		$result = $conn->query("SELECT * FROM users WHERE user_type=1");
+		if ($result->num_rows > 0) {
+			$error_msg = "Only the owner can register.";
+		}
+
 		// verify all the required form data was entered
-		if ($email != "" && $passwd != "" && $passwd_again != "") {
+		else if ($email != "" && $passwd != "" && $passwd_again != "") {
 			// make sure the two passwords are match
 			if ($passwd === $passwd_again) {
 				// make sure the password meets the min strength requirements
@@ -55,11 +61,14 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 						$passwd = md5($passwd);
 						$date_created = date('Y-m-d H:i:s');
 						$status = true;
-						$user_type = 1;
+						$user_type = 1; // Owner
 
 						// insert the user into database
-						mysqli_query($conn, "INSERT INTO users (first_name, last_name, email, password, date_created, status, user_type)
-							VALUES ('{$first_name}', '{$last_name}', '{$email}', '{$passwd}', '{$date_created}', '{$status}', '{$user_type}')");
+						$qry = "INSERT INTO users (first_name, last_name, email, password, date_created, status, user_type)
+							VALUES ('{$first_name}', '{$last_name}', '{$email}', '{$passwd}', '{$date_created}', '{$status}', '{$user_type}')";
+						echo "Executing query: ".$qry;
+						$result = mysqli_query($conn, $qry);
+						echo "Insert result".$result;
 						//verify the user's account was created
 						$query = mysqli_query($conn, "SELECT * FROM users WHERE email='{$email}'");
 						if (mysqli_num_rows($query) == 1) {
@@ -94,7 +103,7 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 		}
 		else {
 			// do nothing
-			echo "";
+			echo "Do nothing";
 		}
 	?>
 	<form action="Registration.php" class="form" method="POST">

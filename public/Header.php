@@ -16,6 +16,8 @@ Purpose: To create navigation bar for restaurant mangement system
 			<a href="">Profile</a>
 			<a href="">Staff</a>
 			<a href="">Reservation/Schedule</a>
+			<a href="Login.php">Login</a>
+			<a href="Registration.php">Register</a>
 		</header>
 	</div>
 </div>
