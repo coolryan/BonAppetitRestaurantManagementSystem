@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS user (
 	FOREIGN KEY (user_type) REFERENCES user_type(id)
 );
 
-CREATE TABLE IF NOT EXISTS ingredient (
-	name varchar(30) NOT NULL PRIMARY KEY
+CREATE TABLE IF NOT EXISTS menu_category (
+	name varchar(50) NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE IF NOT EXISTS menu_item (
@@ -28,7 +28,13 @@ CREATE TABLE IF NOT EXISTS menu_item (
 	name varchar(30) NOT NULL,
 	price  DECIMAL(10,2) NOT NULL,
 	active TINYINT NOT NULL DEFAULT 1,
-	UNIQUE (name)
+	category varchar(50) NOT NULL,
+	UNIQUE (name),
+	FOREIGN KEY (category) REFERENCES menu_category(name)
+);
+
+CREATE TABLE IF NOT EXISTS ingredient (
+	name varchar(30) NOT NULL PRIMARY KEY
 );
 
 CREATE TABLE IF NOT EXISTS menu_item_ingredient (
@@ -39,6 +45,7 @@ CREATE TABLE IF NOT EXISTS menu_item_ingredient (
 	FOREIGN KEY (ingredient_name) REFERENCES ingredient(name),
 	PRIMARY KEY (menu_item, ingredient_name)
 );
+
 
 create user 'bonappetit'@'localhost' identified by 'bonappetit';
 grant ALL on bonappetit.* to 'bonappetit'@'localhost';
