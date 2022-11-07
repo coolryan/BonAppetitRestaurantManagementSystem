@@ -10,7 +10,7 @@ Purpose: To create navigation bar for restaurant mangement system
 <div class="Navbar">
 	<div class="Navbar-links">
 		<header>
-			<a href="Welcome.php">Home</a>
+			<a href="/Welcome.php">Home</a>
 			<a href="">Restaurant Menu</a>
 			<a href="">Inventory</a>
 			<a href="">Profile</a>
@@ -19,13 +19,13 @@ Purpose: To create navigation bar for restaurant mangement system
 <?php
 	require_once("utils.php");
 	if(isLoggedIn()) {
-		echo '<a href="Logout.php">Logout</a>';
-		echo '<a href="editmenu.php">Menu</a>';
+		echo '<a href="/Logout.php">Logout</a>';
+		echo '<a href="/editmenu.php">Menu</a>';
 	}
 	else {
-		echo '<a href="menu.php">Menu</a>';
-		echo '<a href="Login.php">Login</a>';
-		echo '<a href="Registration.php">Register</a>';
+		echo '<a href="/menu.php">Menu</a>';
+		echo '<a href="/Login.php">Login</a>';
+		echo '<a href="/Registration.php">Register</a>';
 	}
 ?>
 			
