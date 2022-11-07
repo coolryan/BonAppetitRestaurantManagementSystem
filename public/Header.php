@@ -26,7 +26,6 @@ Purpose: To create navigation bar for restaurant mangement system
 		echo '<a href="Registration.php">Register</a>';
 	}
 ?>
-			
 		</header>
 	</div>
 </div>
