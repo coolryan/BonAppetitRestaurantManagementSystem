@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS menu_category (
 CREATE TABLE IF NOT EXISTS menu_item (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name varchar(30) NOT NULL,
+	description varchar(250) DEFAULT NULL,
 	price  DECIMAL(10,2) NOT NULL,
 	active TINYINT NOT NULL DEFAULT 1,
 	category varchar(50) NOT NULL,

@@ -46,12 +46,14 @@
 		$qry_result = mysqli_query($conn, "SELECT * FROM menu_item where id= {$item_id}");
 		$menu_item = mysqli_fetch_assoc($qry_result);
 		$name = $menu_item["name"];
+		$description = $menu_item["description"];
 		$category = $menu_item["category"];
 		$price = $menu_item["price"];
 		$active = ($menu_item["active"] >0) ? True : False;
 	} else {
 		$item_id = "";
 		$name = "";
+		$description = "";
 		$category = "";
 		$price = "";
 		$active = True;
@@ -63,6 +65,8 @@
 		<input name="id" type="hidden" value="<?= $item_id; ?>">
 		<label for="name">Name</label>
 		<input type="text" name="name" value="<?= $name; ?>" autocomplete="off" required><br>
+		<label for="description">Description</label>
+		<input type="text" name="description" value="<?= $description; ?>" autocomplete="off" required><br>
 		<label for="category">Category</label>
 		<select name="category" id="category">
 	<?php
@@ -79,6 +83,7 @@
 		<input type="checkbox" name="active" <?= $active ? "checked" : "" ?> /> <br>
 
 		<input type="submit" name="save" value="Save"><br>
+		<input type="button" name="cancel" value="Cancel" onClick="window.location.href='/editmenu.php';"><br>
 	</div>
 </form>
 <?php include_once('Footer.php'); ?>

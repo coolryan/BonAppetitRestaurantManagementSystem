@@ -11,9 +11,7 @@ Purpose: To create navigation bar for restaurant mangement system
 	<div class="Navbar-links">
 		<header>
 			<a href="/Welcome.php">Home</a>
-			<a href="">Restaurant Menu</a>
 			<a href="">Inventory</a>
-			<a href="">Profile</a>
 			<a href="">Staff</a>
 			<a href="">Reservation/Schedule</a>
 <?php
