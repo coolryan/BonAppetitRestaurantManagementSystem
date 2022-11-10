@@ -3,9 +3,9 @@ INSERT INTO user_type (id, name) VALUES
 (2, "manager"),
 (3, "staff");
 
-insert into menu_category values ("Main Dishes");
+INSERT INTO menu_category VALUES ("Main Dishes");
 
-insert into menu_item values (NULL, "Classic Burger", 18.99, 1, "Main Dishes");
+INSERT INTO menu_item VALUES (NULL, "Classic Burger", 18.99, 1, "Main Dishes");
 
 INSERT INTO menu_category VALUES
 ("Main Dishes"),
@@ -19,3 +19,21 @@ INSERT INTO menu_item (name, description, price, active, category) VALUES
 ("Ice Cream Sundae", "Vanilla, chocolate, and strawberry ice cream with bananas, nuts, and whipped cream.", 6.99, 1, "Desserts"),
 ("Jalapaño Poppers", "Breaded jalapeño peppers served with salsa.", 6.99, 1, "Appetizers"),
 ("Quesadilla", "Fresh qusadilla with cheddar and mozzarella cheese, served with salsa.", 7.49, 1, "Appetizers");
+
+INSERT INTO restaurant (name, address, cuisine_type)
+VALUES ("Bon Appetiti","10th Street Ave, NYC, NY, 113642, USA", "American");
+-- ("", "", "Italian"),
+-- ("", "", "French"),
+-- ("", "", "Chinese"),
+-- ("", "", "Japanese"),
+-- ("", "", "Indian"),
+-- ("", "", "Greek"),
+-- ("", "", "Spanish"),
+-- ("", "", "Lebanese"),
+-- ("", "", "Moroccan"),
+-- ("", "", "Turkish"),
+-- ("", "", "Thai"),
+-- ("", "", "Pakistani"),
+-- ("", "", "Indonesian"),
+-- ("", "", "German"), 
+-- ("", "", "Oceanic");
