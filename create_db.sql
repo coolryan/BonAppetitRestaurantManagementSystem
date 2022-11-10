@@ -47,6 +47,12 @@ CREATE TABLE IF NOT EXISTS menu_item_ingredient (
 	PRIMARY KEY (menu_item, ingredient_name)
 );
 
+CREATE TABLE IF NOT EXISTS restaurant (
+	name varchar(30) NOT NULL,
+	address varchar(120) NOT NULL,
+	cuisine_type varchar(30) NOT NULL
+);
+
 
 create user 'bonappetit'@'localhost' identified by 'bonappetit';
 grant ALL on bonappetit.* to 'bonappetit'@'localhost';

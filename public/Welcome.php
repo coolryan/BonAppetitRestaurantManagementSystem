@@ -15,7 +15,6 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
-	<h1>Welcome To Bon Appetit Paris</h1>
 	<?php
 		// AT TOP
 		require_once("Header.php");
@@ -24,8 +23,12 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 		$logged_in = isLoggedIn();
 
 		//include our connect
-		// require_once("Connect.php")
-
+		require_once("Connect.php");
+		$qry_result = mysqli_query($conn, "SELECT * FROM restaurant")->fetch_assoc();
+		$restaurantName = $qry_result['name'];
+	?>
+	<h1>Welcome To <?= $restaurantName ?></h1>
+	<?php
 		// // display the user aware navigation links
 		// if ($LOGGED_IN == true) {
 		// 	echo "<a href='Logout.php'>Logout</a>";
@@ -51,8 +54,20 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 		// }
 		// else
 		// 	echo "Please login to your account to see some super cool stuff!";
-
-		//AT BOTTOM
+	?>
+	<b><h2>Our Story</h2></b>
+	<b><p>
+		Ted and James Bradley were born and raised in New York City, NY.<br>
+		In early 1920's, they open the Bon Appetit Paris restaruarnt in small town of Glen Cove, NY.<br>
+		They always holding to tehir true motto "The Best Food, The Best Restaurant,".<br>
+		Many people loved so that they decide about it to their friends and family. Unforuntely,
+		over the course of years since 1920's, they were grow tire the orginal location and decide to open up newer and better version the restaurant; but then the popularity went down due to the great depression.<br>
+		The orginal owners got sick and malnurshed during at teh time and they decesse and the restuarnt was closed for long time.<br>
+		After many years had pass. Unknown new oweners some how gain the opportunity in 21th century and decide to create website
+		about this restaurant and had modern day touches to it.
+	</p></b>
+	<?php 
+	//AT BOTTOM
 		include_once('Footer.php');
 	?>
 </body>
