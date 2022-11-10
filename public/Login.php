@@ -44,7 +44,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 				// make sure the required fileds were entered
 				if ($email != "" && $passwd != "") {
 					// query the database to see if the email exists
-					$query = mysqli_query($conn, "SELECT * FROM users WHERE email='{$email}'");
+					$query = mysqli_query($conn, "SELECT * FROM user WHERE email='{$email}'");
 					if (mysqli_num_rows($query) == 1) {
 						// get the record from the query
 						$record = mysqli_fetch_assoc($query);
@@ -58,7 +58,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 								$last_login = time();
 
 								$user_id = $record['id'];
-								$qry = "UPDATE users SET last_login='{$last_login}' WHERE id='{$user_id}'";
+								$qry = "UPDATE user SET last_login='{$last_login}' WHERE id='{$user_id}'";
 								mysqli_query($conn, $qry);
 
 								// IF YOU GET HERE THE USER CAN LOGIN

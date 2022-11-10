@@ -20,6 +20,7 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 		// AT TOP
 		require_once("Header.php");
 		require_once("utils.php");
+		checkAndStartSession();
 		$logged_in = isLoggedIn();
 
 		//include our connect
@@ -38,7 +39,7 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 		// 	echo 'Hello '.$_SESSION['username'].', how are you today?<br><br>';
 
 		// 	// get the user's account information from the database
-		// 	$query = mysqli_query($conn, "SELECT * FROM users WHERE id="{$_SESSION['userID']}"");
+		// 	$query = mysqli_query($conn, "SELECT * FROM user WHERE id="{$_SESSION['userID']}"");
 		// 	if (mysqli_num_rows($query) == 1) {
 		// 		$_USER = mysqli_fetch_assoc($query);
 

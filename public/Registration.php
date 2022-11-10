@@ -21,9 +21,11 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 	<?php
 		// include our connect script
 		require_once("Connect.php");
+		require_once("utils.php");
+		checkAndStartSession();
 
 		// check to see if there is a user already logged in, if so redirect them
-		session_start();
+		
 		if (isset($_SESSION['email'])) {
 			// redirect the user to the home page
 			header("Location: Welcome.php");
@@ -40,7 +42,7 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 		}
 
 		// Only the owner can register. Everyone else should be added by the owner or manager
-		$result = $conn->query("SELECT * FROM users WHERE user_type=1");
+		$result = $conn->query("SELECT * FROM user WHERE user_type=1");
 		if ($result->num_rows > 0) {
 			$error_msg = "Only the owner can register.";
 		}
@@ -52,8 +54,8 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 				// make sure the password meets the min strength requirements
 				if (strlen($passwd) >= 8 && strpbrk($passwd, "!#$.,:;()") != false) {
 					// query the database to see the email is taken
-					// $query = mysqli_query($conn, "SELECT * FROM users WHERE email='{email}'");
-					$query = $conn->prepare("SELECT * FROM users WHERE email=?");
+					// $query = mysqli_query($conn, "SELECT * FROM user WHERE email='{email}'");
+					$query = $conn->prepare("SELECT * FROM user WHERE email=?");
 					$query->bind_param('s', $email);
 					$query->execute();
 					$query->store_result();
@@ -65,12 +67,12 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 						$user_type = 1; // Owner
 
 						// insert the user into database
-						$qry = "INSERT INTO users (first_name, last_name, email, password, date_created, status, user_type)
+						$qry = "INSERT INTO user (first_name, last_name, email, password, date_created, status, user_type)
 							VALUES ('{$first_name}', '{$last_name}', '{$email}', '{$passwd}', '{$date_created}', '{$status}', '{$user_type}')";
 						$result = mysqli_query($conn, $qry);
-			
+						
 						//verify the user's account was created
-						$query = mysqli_query($conn, "SELECT * FROM users WHERE email='{$email}'");
+						$query = mysqli_query($conn, "SELECT * FROM user WHERE email='{$email}'");
 						if (mysqli_num_rows($query) == 1) {
 							// IF WE ARE HERE THEN THE ACCOUNT WAS CREATED YAY!
 							// WE WILL SEND EMAIL ACTIVATION CODE HERE LATER
