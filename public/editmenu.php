@@ -7,9 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
-
-
-
 	<?php
 	require_once("Header.php");
 	require_once("Connect.php");

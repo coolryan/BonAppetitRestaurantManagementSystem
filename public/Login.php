@@ -34,7 +34,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 				header("Location: Welcome.php");
 			}
 
-			// check to see if the user clciked the login buttion
+			// check to see if the user clicked the login buttion
 			
 			if (!empty($_POST['loginBtn'])) {
 				// get the form data for processing
@@ -94,7 +94,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 		?>
 	</div>
 	<div class="container2">
-		<form action="Login.php" method="POST" name="loginForm">
+		<form action="Login.php" method="POST" name="loginForm" id="loginForm">
 			<table>
 				<tr><td>Email: <font color="red">*</font></td></tr>
 				<tr><td><input type="text" name="email" value="" size="35"></td></tr>

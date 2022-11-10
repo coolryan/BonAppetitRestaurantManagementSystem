@@ -1,17 +1,18 @@
 body {
-	background: white;
+	background: honeydew;
 }
 
 .Navbar {
 	background-color: lavender;
 	padding: 5px;
-	border: 1px solid black;
+	border: 2px solid black;
 	margin-bottom: 10px;
+	border-radius: 20px;
 }
 
 .Navbar-links a {
-	padding-right: 10px;
-	border-right: 1px solid black;
+	padding-left: 10px;
+	text-transform: uppercase;
 }
 
 .Navbar-links a:link {
@@ -20,5 +21,24 @@ body {
 
 .Navbar-links a:hover{
 	cursor: pointer;
-	color: purple;
+	color: black;
+}
+
+.Navbar-links a:link, a:visited{
+	color: darkslategray;
+}
+form {
+	position: relative;	
+	background-color: oldlace;
+	padding: 10px;
+	border-radius: 20px;
+	display: inline-block;
+}
+
+form input, label {
+	display: block;
+}
+
+form label {
+	margin-bottom: 5px;
 }

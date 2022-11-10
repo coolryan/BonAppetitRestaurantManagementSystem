@@ -16,6 +16,7 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 </head>
 <body>
 	<h1>Bon Appetit Paris Restaurant Mangement System-Register</h1><br>
+	<?php require_once("Header.php");?>
 	<h2><b>Create Owner account</b></h2>
 	<?php
 		// include our connect script
@@ -68,7 +69,6 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 						// insert the user into database
 						$qry = "INSERT INTO user (first_name, last_name, email, password, date_created, status, user_type)
 							VALUES ('{$first_name}', '{$last_name}', '{$email}', '{$passwd}', '{$date_created}', '{$status}', '{$user_type}')";
-						
 						$result = mysqli_query($conn, $qry);
 						
 						//verify the user's account was created
@@ -108,22 +108,25 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 			echo "Do nothing";
 		}
 	?>
-	<form action="Registration.php" class="form" method="POST">
-		<div class="container1">
-			First Name:
-			<input type="text" name="fname" value="" autocomplete="off" required><br>
-			Last Name:
-			<input type="text" name="lname" value="" autocomplete="off" required><br>
-			Email:
-			<input type="text" name="email" value="" placeholder="Provide an email" autocomplete="off" required><br>
-			Password:
-			<input type="password" name="passwd" value="" placeholder="Enter a password" autocomplete="off" required>
-			<p><font>password must be at least 8 characters and<br/> have a special character, e.g. !#$.,:;()</font></p>
-			Confirrm password:
-			<input type="password" name="confirm_password" value="" placeholder="confirm your password" autocomplete="off" required><br>
-			<input type="submit" name="registerBtn" value="Create Owner account"><br>
-			<p>Already have an account? <a href="Login.php">Login here</a></p>
-		</div>
+	<form action="Registration.php" class="registerForm" method="POST" id="registerForm">
+		<label for="fname">First Name:</label>
+		<input type="text" name="fname" value="" autocomplete="off" required><br>
+
+		<label for="lname">Last Name:</label>
+		<input type="text" name="lname" value="" autocomplete="off" required><br>
+
+		<label for="email">Email:</label>
+		<input type="text" name="email" value="" placeholder="Provide an email" autocomplete="off" required><br>
+
+		<label for="passwd">Password:</label>
+		<input type="password" name="passwd" value="" placeholder="Enter a password" autocomplete="off" required>
+		
+		<p><font>password must be at least 8 characters and<br/> have a special character, e.g. !#$.,:;()</font></p>
+		<label for="confirm_password">Confirrm password:</label>
+		<input type="password" name="confirm_password" value="" placeholder="confirm your password" autocomplete="off" required><br>
+		<input type="submit" name="registerBtn" value="Create Owner account"><br>
+		<p>Already have an account? <a href="Login.php">Login here</a></p>
 	</form>
+	<?php require_once("Footer.php");?>
 </body>
 </html>

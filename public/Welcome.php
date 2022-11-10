@@ -23,10 +23,8 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 		checkAndStartSession();
 		$logged_in = isLoggedIn();
 
-		// include our connect
-		//require_once("Connect.php")
-
-		
+		//include our connect
+		// require_once("Connect.php")
 
 		// // display the user aware navigation links
 		// if ($LOGGED_IN == true) {
