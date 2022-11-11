@@ -48,11 +48,12 @@ CREATE TABLE IF NOT EXISTS menu_item_ingredient (
 );
 
 CREATE TABLE IF NOT EXISTS restaurant (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name varchar(30) NOT NULL,
 	address varchar(120) NOT NULL,
-	cuisine_type varchar(30) NOT NULL
+	cuisine_type varchar(30) NOT NULL,
+	back_story varchar(1500) NOT NULL
 );
-
 
 create user 'bonappetit'@'localhost' identified by 'bonappetit';
 grant ALL on bonappetit.* to 'bonappetit'@'localhost';
