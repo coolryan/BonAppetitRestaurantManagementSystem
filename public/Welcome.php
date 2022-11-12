@@ -26,6 +26,12 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 		require_once("Connect.php");
 		$qry_result = mysqli_query($conn, "SELECT * FROM restaurant")->fetch_assoc();
 		$restaurantName = $qry_result['name'];
+		$restaurantID = $qry_result['id'];
+		if($logged_in) {
+	?>
+	<button><a href="/restaurant_info.php/?id=<?= $restaurantID ?>">Edit Restaurant</a></button>
+	<?php
+		}
 	?>
 	<h1>Welcome To <?= $restaurantName ?></h1>
 	<b><h2>Our Story</h2></b>
@@ -34,6 +40,5 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 	//AT BOTTOM
 		include_once('Footer.php');
 	?>
-	<button><a href="restaurant_info.php">Edit Restaurant</a></button>
 </body>
 </html>

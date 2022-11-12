@@ -1,0 +1,1 @@
+<p class="error">Unauthorized access. Please return to <a href="/Welcome.php">home page!</a></p>

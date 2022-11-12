@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Restaurant Information</title>
-	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
+	<link rel="stylesheet" type="text/css" href="/CSS/Main.css">
 </head>
 <body>
 	<?php 
@@ -13,6 +13,12 @@
 		require_once("utils.php");
 		checkAndStartSession();
 		$logged_in = isLoggedIn();
+
+		if(!$logged_in) {
+			require_once("Unauthorized_access.php");
+			require_once("Footer.php");
+			exit();		
+		}
 
 		// Connect to MySQL
 		require_once("Connect.php");
@@ -41,9 +47,9 @@
 			}
 
 			if(isset($error_msg)) {
-				echo "<p color='red'>".$error_msg."</p>";
+				echo "<p class='error'>".$error_msg."</p>";
 			} else if(isset($success) && $success) {
-				echo "<p color='green'>Menu item saved!</p>";
+				echo "<p class='success'>Menu item saved!</p>";
 			}
 		}
 		else if(!empty($_GET['id'])) {
@@ -82,7 +88,6 @@
 	</form>
 
 	<?php
-		// Footer 
 		require_once("Footer.php"); 
 	?>
 </body>
