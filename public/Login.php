@@ -90,9 +90,9 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 	<form action="Login.php" method="POST" name="loginForm" id="loginForm">
 		<table>
 			<tr><td>Email: <font color="red">*</font></td></tr>
-			<tr><td><input type="text" name="email" value="" size="35"></td></tr>
+			<tr><td><input type="text" name="email" value="" placeholder="Provide an email" size="35" required></td></tr>
 			<tr><td>Password: <font color="red">*</font></td></tr>
-			<tr><td><input type="password" name="passwd" value="" size="35"></td></tr>
+			<tr><td><input type="password" name="passwd" value="" placeholder="Enter a password" size="35" required></td></tr>
 			<tr><td>
 				<input type="submit" name="loginBtn" value="Login">
 				<font color="red">*</font> = required fields

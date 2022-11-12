@@ -34,5 +34,6 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 	//AT BOTTOM
 		include_once('Footer.php');
 	?>
+	<button><a href="restaurant_info.php">Edit Restaurant</a></button>
 </body>
 </html>

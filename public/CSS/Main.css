@@ -37,8 +37,29 @@ form {
 
 form input, label {
 	display: block;
+	border-radius: 20px;
+}
+
+form input {
+	background-color: lightseagreen;
 }
 
 form label {
 	margin-bottom: 5px;
+}
+footer {
+	position: absolute;
+	padding: 10px;
+	bottom:0;
+   	width:25%;
+   	height:150px;
+	background-color: lightgreen;
+	display: inline-block;
+	border-radius: 20px;
+}
+
+button {
+	background-color: lavender;
+	border-radius: 20px;
+	float: right;
 }
