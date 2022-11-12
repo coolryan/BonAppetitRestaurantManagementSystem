@@ -125,7 +125,7 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 		<label for="confirm_password">Confirrm password:</label>
 		<input type="password" name="confirm_password" value="" placeholder="confirm your password" autocomplete="off" required><br>
 		<input type="submit" name="registerBtn" value="Create Owner account"><br>
-		<p>Already have an account? <a href="Login.php">Login here</a></p>
+		<p>Already have an account?<button><a href="Login.php">Login here</a></button></p>
 	</form>
 	<?php require_once("Footer.php");?>
 </body>

@@ -12,8 +12,8 @@ Purpose: To create navigation bar for restaurant mangement system
 		<header>
 			<a href="/Welcome.php">Home</a>
 			<a href="">Inventory</a>
-			<a href="">Staff</a>
-			<a href="">Reservation/Schedule</a>
+			<a href="/staff.php">Staff</a>
+			<a href="/reservation_schedule.php">Reservation/Schedule</a>
 <?php
 	require_once("utils.php");
 	if(isLoggedIn()) {
