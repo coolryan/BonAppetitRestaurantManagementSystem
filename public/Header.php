@@ -13,7 +13,7 @@ Purpose: To create navigation bar for restaurant mangement system
 			<a href="/Welcome.php">Home</a>
 			<a href="">Inventory</a>
 			<a href="/staff.php">Staff</a>
-			<a href="/reservation_schedule.php">Reservation/Schedule</a>
+			<a href="/reservation.php">Reservation</a>
 <?php
 	require_once("utils.php");
 	if(isLoggedIn()) {

@@ -48,11 +48,27 @@ CREATE TABLE IF NOT EXISTS menu_item_ingredient (
 );
 
 CREATE TABLE IF NOT EXISTS restaurant (
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	resturant_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name varchar(30) NOT NULL,
 	address varchar(120) NOT NULL,
 	cuisine_type varchar(30) NOT NULL,
 	back_story varchar(1500) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS restaurant_table (
+	restaurant_table_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	max_chairs INT NOT NULL,
+	FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
+);
+
+CREATE TABLE IF NOT EXISTS reservation_table (
+	reservation_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	resturant_date DATE NOT NULL,
+	resturant_time TIME NOT NULL,
+	patron_name varchar(50) NOT NULL,
+	patron_phone varchar(50) NOT NULL,
+	patron_email varchar(75) NOT NULL,
+	FOREIGN KEY (restaurant_table_id) REFERENCES restaurant_table(restaurant_table_id)  
 );
 
 create user 'bonappetit'@'localhost' identified by 'bonappetit';
