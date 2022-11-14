@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Edit Menu Item Page</title>
+	<title>Edit Reservation Page</title>
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
-	<?php
+	<?php  
 		require_once("Header.php");
 		require_once("Connect.php");
 		require_once("utils.php");
@@ -58,8 +58,7 @@
 			$active = True;
 		}
 	?>
-
-	<form action="editmenuitem.php" class="form" method="POST">
+	<form action="editreserverationItem.php" class="form" method="POST">
 		<input name="id" type="hidden" value="<?= $item_id; ?>">
 		<label for="name">Name</label>
 		<input type="text" name="name" value="<?= $name; ?>" autocomplete="off" required><br>
@@ -67,7 +66,7 @@
 		<input type="text" name="description" value="<?= $description; ?>" autocomplete="off" required><br>
 		<label for="category">Category</label>
 		<select name="category" id="category">
-	<?php
+	<?php  
 		$qry_result = mysqli_query($conn, "SELECT name FROM menu_category")->fetch_all(MYSQLI_ASSOC);
 		foreach($qry_result as $category_vals):
 			$selected = ($category == $category_vals["name"]) ? "selected" : "";
@@ -85,4 +84,4 @@
 	</form>
 	<?php include_once('Footer.php'); ?>
 </body>
-</html>	
+</html>

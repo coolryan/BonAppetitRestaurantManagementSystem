@@ -18,20 +18,20 @@
 		require_once("Connect.php");
 	?>
     <?php 
-        if (isset($_POST['variable'])) {
+        if (isset($_POST['name'])) {
             $reservation_id = (empty($_POST['reservation_id'])) ? null : $_POST['reservation_id'];
-            $numberOfPeople = $_POST['numberOfPeople'];
+            $party_size = $_POST['party_size'];
             $name = $_POST['name'];
             $email = $_POST['email'];
             $phone = $_POST['phone'];
-            $date = $_POST['rest_date'];
-            $time = $_POST['rest_time'];
+            $date = $_POST['reservation_date'];
+            $time = $_POST['reservation_time'];
 
             if($reservation_id == null) {
-                $qry = "INSERT INTO reservation_table (reservation_id, numberOfPeople, name, email, phone, rest_date, rest_time) VALUES (NULL, '{$email}', '{$phone}', '{$date}', '{$time}')";
+                $qry = "INSERT INTO reservation_table (party_size, name, email, phone, reservation_date, reservation_time) VALUES ({$party_size}, '{$name}', '{$email}', '{$phone}', '{$date}', '{$time}')";
             }
             else {
-                $qry = "UPDATE reservation_table SET name='{$name}', email='{$email}', phone='{$cuisine_type}', rest_date= '{$date}',rest_time= '{$time}'  WHERE reservation_id={$reservation_id}";
+                $qry = "UPDATE reservation_table SET party_size={$party_size}, name='{$name}', email='{$email}', phone='{$phone}', reservation_date= '{$date}',reservation_time= '{$time}'  WHERE reservation_id={$reservation_id}";
             }
 
             $qry_result = mysqli_query($conn, $qry);
@@ -42,24 +42,24 @@
             if(isset($error_msg)) {
                 echo "<p class='error'>".$error_msg."</p>";
             } else if(isset($success) && $success) {
-                echo "<p class='success'>Menu item saved!</p>";
+                echo "<p class='success'>Reservation saved!</p>";
             }
         }
 
-        else if(!empty($_GET['$reservation_id'])) {
-            $reservation_id = $_GET['$reservation_id'];
-            $qry_result = mysqli_query($conn, "SELECT * FROM reservation_table where $reservation_id= {$reservation_id}");
+        else if(!empty($_GET['reservation_id'])) {
+            $reservation_id = $_GET['reservation_id'];
+            $qry_result = mysqli_query($conn, "SELECT * FROM reservation_table where reservation_id= {$reservation_id}");
             $restaurant_table = mysqli_fetch_assoc($qry_result);
-            $numberOfPeople = $restaurant_table["numberOfPeople"];
+            $party_size = $restaurant_table["party_size"];
             $name = $restaurant_table["name"];
             $email = $restaurant_table["email"];
             $phone = $restaurant_table["phone"];
-            $date = $restaurant_table["rest_date"];
-            $time = $restaurant_table["rest_time"];
+            $date = $restaurant_table["reservation_date"];
+            $time = $restaurant_table["reservation_time"];
         } 
         else {
             $reservation_id = "";
-            $numberOfPeople = "";
+            $party_size = 0;
             $name = "";
             $email = "";
             $phone = "";
@@ -70,23 +70,23 @@
 	<form action="reservation.php" method="POST">
         <input type="hidden" name="reservation_id" value="<?=$reservation_id?>">
 
-        <label>Enter a number of people:</label>
-        <input type="text" name="numberOfPeople" value="<?=$numberOfPeople?>" placeholder="Provide a number">
+        <label for="party_size">Enter a number of people:</label>
+        <input type="number" min="1" step="1" id="party_size" name="party_size" value="<?=$party_size?>" placeholder="Provide a number">
 
         <label>Select a date:</label>
-        <input type="date" name="dateForm" value="<?=$date?>">
+        <input type="date" name="reservation_date" value="<?=$date?>">
 
         <label>Select a time:</label>
-        <input type="time" name="timeForm" value="<?=$time?>">
+        <input type="time" name="reservation_time" value="<?=$time?>">
 
-        <label>Enter your name:</label>
-        <input type="text" name="name" value="<?=$name?>" placeholder="Provide an name" required>
+        <label for="name">Enter your name:</label>
+        <input type="text" id="name" name="name" value="<?=$name?>" placeholder="Provide an name" required>
 
-        <label>Enter your email:</label>
-        <input type="text" name="email" value="<?=$email?>" placeholder="Provide an email" required>
+        <label for="email">Enter your email:</label>
+        <input type="email" id="email" name="email" value="<?=$email?>" placeholder="Provide an email" required>
 
-        <label>Enter your phone number:</label>
-        <input type="text" name="phone" value="<?=$phone?>" placeholder="Provide an phone" required>
+        <label for="phone">Enter your phone number:</label>
+        <input type="tel" id="phone" name="phone" value="<?=$phone?>" placeholder="Provide an phone" required>
 
         <input type="submit" name="Submit">
     </form>
