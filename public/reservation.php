@@ -13,35 +13,38 @@
         require_once("utils.php");
         checkAndStartSession();
 
-        function getByCategory($qry_result) {
-            $menu_by_cat = array();
-            foreach($qry_result as $menu_item) {
-                $cat = $menu_item['category'];
-                if(!array_key_exists($cat, $menu_by_cat)) {
-                    $menu_by_cat[$cat] = array();
+        function getByID($qry_result) {
+            $reservation_by_cat = array();
+            foreach($qry_result as $reservation_item) {
+                $cat = $reservation_item['reservation_id'];
+                if(!array_key_exists($cat, $reservation_by_cat)) {
+                    $reservation_by_cat[$cat] = array();
                 }
-                array_push($menu_by_cat[$cat], $menu_item);
+                array_push($reservation_by_cat[$cat], $reservation_item);
             }
-            return $menu_by_cat;
+            return $reservation_by_cat;
         }
 
-        $qry_result = mysqli_query($conn, "SELECT * FROM menu_item WHERE active>0")->fetch_all(MYSQLI_ASSOC);
-        $menu_by_cat = getByCategory($qry_result);
+        $qry_result = mysqli_query($conn, "SELECT * FROM reservation_table WHERE reservation_id={$reservation_id}")->fetch_all(MYSQLI_ASSOC);
+        $reservation_by_cat = getByCategory($qry_result);
 
-        $category_order = array("Appetizers", "Main Dishes", "Desserts");
+        $category_order = array("Name", "Phone", "Party size","Date","Time");
 
         foreach($category_order as $cat) {
-            $menu_items = $menu_by_cat[$cat];
-            if(!array_key_exists($cat, $menu_by_cat)) {
+            $reservation_items = $reservation_by_cat[$cat];
+            if(!array_key_exists($cat, $reservation_by_cat)) {
                 continue;
             }
-            echo "<h4 class='menuCategory'>{$cat}</h4>";
-            foreach($menu_items as $menu_item) {
+            echo "<h4 class='reservationCategory'>{$cat}</h4>";
+            foreach($reservation_items as $reservation_item) {
     ?>
-            <div class="menuItem">
-                <div class="menuItemName"><?= $menu_item["name"]; ?></div>
-                <div class="menuItemPrice"><?= $menu_item["price"]; ?></div>
-                <div class="menuItemDescription"><?= $menu_item["description"]; ?></div>
+            <div class="reservationItem">
+                <div class="reservationName"><?= $reservation_item["name"]; ?></div>
+                <div class="reservationParty_size"><?= $reservation_item["party_size"]; ?></div>
+                <div class="reservationEmail"><?= $reservation_item["email"]; ?></div>
+                <div class="reservationPhone"><?= $reservation_item["phone"]; ?></div>
+                <div class="reservationDate"><?= $reservation_item["reservation_date"]; ?></div>
+                <div class="reservationTime"><?= $reservation_item["reservation_time"]; ?></div>
             </div>
     <?php
             }
