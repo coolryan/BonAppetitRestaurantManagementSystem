@@ -70,3 +70,7 @@ button {
 .success {
 	color: green;
 }
+
+.reservationItem label {
+	display: inline;
+}

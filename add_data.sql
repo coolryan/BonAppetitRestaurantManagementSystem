@@ -3,10 +3,6 @@ INSERT INTO user_type (id, name) VALUES
 (2, "manager"),
 (3, "staff");
 
-INSERT INTO menu_category VALUES ("Main Dishes");
-
-INSERT INTO menu_item VALUES (NULL, "Classic Burger", 18.99, 1, "Main Dishes");
-
 INSERT INTO menu_category VALUES
 ("Main Dishes"),
 ("Desserts"),
