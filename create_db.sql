@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS menu_item (
 	price  DECIMAL(10,2) NOT NULL,
 	active TINYINT NOT NULL DEFAULT 1,
 	category varchar(50) NOT NULL,
+	image_path varchar(100),
 	UNIQUE (name),
 	FOREIGN KEY (category) REFERENCES menu_category(name)
 );
