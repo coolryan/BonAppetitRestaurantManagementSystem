@@ -85,6 +85,7 @@
 
         <input type="submit" name="Submit">
     </form>
+    <button><a href="view_reservations.php">Edit Reservation</a></button>
 
     <?php
         include_once('Footer.php'); 

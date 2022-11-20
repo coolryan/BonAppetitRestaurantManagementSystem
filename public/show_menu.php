@@ -22,7 +22,5 @@ foreach($qry_result as $menu_item)	{
 	
 		<td><a href='<?= $edit_link ?>'>Edit</a></td>
 	</tr>
-<?php
-}
-?>
+<?php } ?>
 </table>

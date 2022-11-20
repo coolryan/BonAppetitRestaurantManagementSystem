@@ -32,7 +32,7 @@
             </tr>
     <?php 
         foreach($qry_result as $reservation_item)  {
-            $edit_link = "/reservation.php.php/?item={$reservation_item['reservation_id']}";
+            $edit_link = "/reservation.php/?item={$reservation_item['reservation_id']}";
             $date_time = "{$reservation_item['reservation_date']} {$reservation_item['reservation_time']}"; 
     ?>
         <!-- <div class="reservationItem">
@@ -60,14 +60,14 @@
 
         <tr>
             <td><?= $reservation_item['reservation_date'] ?></td>
-            <td><?= $reservation_item['reservation_item]' ?></td>
+            <td><?= $reservation_item['reservation_time'] ?></td>
             <td><?= $reservation_item['party_size'] ?></td>
             <td><?= $reservation_item['name'] ?></td>
             <td><?= $reservation_item['email'] ?></td>
             <td><?= $reservation_item['phone'] ?></td>
             <td><a href='<?= $edit_link ?>'>Edit</a></td>
         </tr>
-    <? } ?>
+    <?php } ?>
     </table>
     <?php require_once("Footer.php");?>
 </body>
