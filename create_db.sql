@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS user_type (
 CREATE TABLE IF NOT EXISTS user (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	email varchar(75) NOT NULL,
+	phone varchar(20) default null
 	first_name varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
 	password varchar(150) NOT NULL,
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS menu_item_ingredient (
 );
 
 CREATE TABLE IF NOT EXISTS restaurant (
-	resturant_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	restaurant_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name varchar(30) NOT NULL,
 	address varchar(120) NOT NULL,
 	cuisine_type varchar(30) NOT NULL,
@@ -58,6 +59,7 @@ CREATE TABLE IF NOT EXISTS restaurant (
 
 CREATE TABLE IF NOT EXISTS restaurant_table (
 	restaurant_table_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	restaurant_id INT NOT NULL,
 	max_chairs INT NOT NULL,
 	FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
 );
@@ -69,6 +71,7 @@ CREATE TABLE IF NOT EXISTS reservation_table (
 	patron_name varchar(50) NOT NULL,
 	patron_phone varchar(50) NOT NULL,
 	patron_email varchar(75) NOT NULL,
+	restaurant_table_id INT DEFAULT NULL,
 	FOREIGN KEY (restaurant_table_id) REFERENCES restaurant_table(restaurant_table_id)  
 );
 

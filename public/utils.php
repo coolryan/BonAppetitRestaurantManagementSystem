@@ -13,4 +13,48 @@
 		else
 			return false;
 	}
+	function isOwner() {
+		// $is_owner = False;
+		// if(isLoggedIn()) {
+		// 	return $_SESSION['user_type_name']=="owner";
+		// }
+		// return $is_owner;
+		return checkRoles("owner");
+	}
+	function isManager() {
+		// $is_manager = False;
+		// if(isLoggedIn()) {
+		// 	return $_SESSION['user_type_name']=="manager";
+		// }
+		// return $is_manager;
+		return checkRoles("manager");
+	}
+	function isStaff() {
+		return checkRoles("staff");
+	}
+	function checkRoles($rolesToCheck) {
+		if(!isset($rolesToCheck))
+			return False;
+		if(!isLoggedIn())
+			return False;
+
+		if(!is_array($rolesToCheck))
+			$rolesToCheck = array($rolesToCheck);
+
+		foreach($rolesToCheck as $role) {
+			if($role == $_SESSION['user_type_name']) {
+				return True;
+			}
+		}
+		return False;
+	}
+	function generateRandomString($length = 10) {
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@$^&*().,?';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+	}
 ?>
