@@ -15,6 +15,7 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
+<div id="content">
 	<h1>Bon Appetit Paris Restaurant Mangement System-Register</h1><br>
 	<?php require_once("Header.php");?>
 	<h2><b>Create Owner account</b></h2>
@@ -128,5 +129,6 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 		<p>Already have an account?<button><a href="Login.php">Login here</a></button></p>
 	</form>
 	<?php require_once("Footer.php");?>
+</div>
 </body>
 </html>

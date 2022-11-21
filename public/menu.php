@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
+<div id="content">
 	<?php
 		require_once("Header.php");
 		require_once("Connect.php");
@@ -42,12 +43,19 @@
 			<div class="menuItemName"><?= $menu_item["name"]; ?></div>
 			<div class="menuItemPrice"><?= $menu_item["price"]; ?></div>
 			<div class="menuItemDescription"><?= $menu_item["description"]; ?></div>
-			<img class="menuItemImage" src="<?= $menu_item["image_path"]; ?>"> 
+			<?php
+				if(!empty($menu_item["image_path"])) {
+					$img = "<img class='menuItemImage' src='{$menu_item["image_path"]}'>";
+					echo $img;
+				}
+			?>
 		</div>
 <?php
 		}
+	}
 
 		include_once('Footer.php'); 
 	?>
+</div>
 </body>
 </html>

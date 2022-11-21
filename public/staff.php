@@ -7,12 +7,19 @@
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
+<div id="content">
 <?php  
 	// Header
 	require_once("Header.php");
 	require_once("utils.php");
 	checkAndStartSession();
-	$logged_in = isLoggedIn();
+	$allowed = isOwner() || isManager();
+	
+	if(!$allowed) {
+		echo "You shouldn't be here!";
+		include_once('Footer.php');
+		exit();
+	}
 
 	// Connect to MySQL
 	require_once("Connect.php");
@@ -54,5 +61,6 @@
 	// Footer 
 	require_once("Footer.php"); 
 ?>
+</div>
 </body>
 </html>

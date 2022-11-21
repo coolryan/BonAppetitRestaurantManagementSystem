@@ -15,6 +15,7 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
+<div id="content">
 	<?php
 		// AT TOP
 		require_once("Header.php");
@@ -40,5 +41,6 @@ Purpose: To create a welcome homepage for Bon Appetit Paris restaurant managemen
 	//AT BOTTOM
 		include_once('Footer.php');
 	?>
+</div>
 </body>
 </html>

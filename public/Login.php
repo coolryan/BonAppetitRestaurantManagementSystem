@@ -15,6 +15,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
+<div id="content">
 	<h1>Bon Appetit Paris Restaurant Mangement system - Login</h1>
 	<?php
 		// include our connect script
@@ -104,5 +105,6 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 	</form>
 	
 	<?php require_once("Footer.php"); ?>
+</div>
 </body>
 </html>
