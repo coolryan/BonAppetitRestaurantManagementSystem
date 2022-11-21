@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
+<div id="content">
 <?php
 	require_once("Header.php");
 	require_once("Connect.php");
@@ -15,7 +16,6 @@
 	// phpinfo();
 
 	if (isset($_POST['name'])) {
-		var_dump($_POST);
 		$item_id = (empty($_POST['id'])) ? null : $_POST['id'];
 		$name = $_POST['name'];
 		$category = $_POST["category"];
@@ -81,7 +81,6 @@
 		$item_id = $_GET['item'];
 		$qry_result = mysqli_query($conn, "SELECT * FROM menu_item where id= {$item_id}");
 		$menu_item = mysqli_fetch_assoc($qry_result);
-		var_dump($menu_item);
 		$name = $menu_item["name"];
 		$description = $menu_item["description"];
 		$category = $menu_item["category"];
@@ -122,9 +121,11 @@
 		<input type="checkbox" name="active" <?= $active ? "checked" : "" ?> /> <br>
 		<input type="file" name="photo" id="photo">
 
-	<input type="submit" name="save" value="Save"><br>
-	<input type="button" name="cancel" value="Cancel" onClick="window.location.href='/editmenu.php';"><br>
+		<input type="submit" name="save" value="Save"><br>
+		<input type="button" name="cancel" value="Cancel" onClick="window.location.href='/editmenu.php';"><br>
+	</div>
 </form>
 <?php include_once('Footer.php'); ?>
+</div>
 </body>
 </html>	

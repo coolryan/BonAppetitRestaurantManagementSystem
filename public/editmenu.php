@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
+<div id="content">
 	<?php
 	require_once("Header.php");
 	require_once("Connect.php");
@@ -20,5 +21,6 @@
 	}
 	include_once('Footer.php'); 
 	?>
+</div>
 </body>
 </html>

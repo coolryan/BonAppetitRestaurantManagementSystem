@@ -14,6 +14,7 @@ Purpose: To allow the owner of Bon Appetit Paris to leave the site
 	<title>Logout Page</title>
 </head>
 <body>
+<div id="content">
 	<?php  
 		// verify the user is logged in
 		require_once("utils.php");
@@ -29,5 +30,6 @@ Purpose: To allow the owner of Bon Appetit Paris to leave the site
 			// redirect the user back to the login page
 			header("Location: Login.php");
 	?>
+</div>
 </body>
 </html>

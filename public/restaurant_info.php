@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="/CSS/Main.css">
 </head>
 <body>
+<div id="content">
 	<?php 
 		// Header
 		require_once("Header.php");
@@ -90,5 +91,6 @@
 	<?php
 		require_once("Footer.php"); 
 	?>
+</div>
 </body>
 </html>
