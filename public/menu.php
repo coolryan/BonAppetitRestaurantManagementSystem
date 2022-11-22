@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
+<div id="content">
 	<?php
 		require_once("Header.php");
 		require_once("Connect.php");
@@ -30,24 +31,31 @@
 
 		$category_order = array("Appetizers", "Main Dishes", "Desserts");
 
-		foreach($category_order as $cat) {
-			$menu_items = $menu_by_cat[$cat];
-			if(!array_key_exists($cat, $menu_by_cat)) {
-				continue;
-			}
-			echo "<h4 class='menuCategory'>{$cat}</h4>";
-			foreach($menu_items as $menu_item) {
-	?>
-			<div class="menuItem">
-				<div class="menuItemName"><?= $menu_item["name"]; ?></div>
-				<div class="menuItemPrice"><?= $menu_item["price"]; ?></div>
-				<div class="menuItemDescription"><?= $menu_item["description"]; ?></div>
-			</div>
-	<?php
-			}
+	foreach($category_order as $cat) {
+		$menu_items = $menu_by_cat[$cat];
+		if(!array_key_exists($cat, $menu_by_cat)) {
+			continue;
 		}
+		echo "<h4 class='menuCategory'>{$cat}</h4>";
+		foreach($menu_items as $menu_item) {
+?>
+		<div class="menuItem">
+			<div class="menuItemName"><?= $menu_item["name"]; ?></div>
+			<div class="menuItemPrice"><?= $menu_item["price"]; ?></div>
+			<div class="menuItemDescription"><?= $menu_item["description"]; ?></div>
+			<?php
+				if(!empty($menu_item["image_path"])) {
+					$img = "<img class='menuItemImage' src='{$menu_item["image_path"]}'>";
+					echo $img;
+				}
+			?>
+		</div>
+<?php
+		}
+	}
 
 		include_once('Footer.php'); 
 	?>
+</div>
 </body>
 </html>

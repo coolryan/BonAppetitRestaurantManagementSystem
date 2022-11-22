@@ -8,10 +8,12 @@
 </head>
 <body>
 	<?php
-        require_once("Header.php");
         require_once("Connect.php");
-        require_once("utils.php");
-        checkAndStartSession();
+		// Header
+		require_once("Header.php");
+		require_once("utils.php");
+		checkAndStartSession();
+		$logged_in = isLoggedIn();
 
         if (isset($_POST['name'])) {
             $reservation_id = (empty($_POST['reservation_id'])) ? null : $_POST['reservation_id'];
@@ -87,8 +89,9 @@
     </form>
     <button><a href="view_reservations.php">Edit Reservation</a></button>
 
-    <?php
-        include_once('Footer.php'); 
-    ?>
+	<?php
+		// Footer 
+		require_once("Footer.php"); 
+	?>
 </body>
 </html>

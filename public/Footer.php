@@ -9,14 +9,13 @@ Purpose: For side note to knowing who created this app
 <footer>
 	<hr>
 	<address>
-		Web Site: <a href="index.php">BonAppetit</a><br>
 		<?php
 			require_once("Connect.php"); 
 			$qry_result = mysqli_query($conn, "SELECT * FROM restaurant")->fetch_assoc();
 			$address = $qry_result['address'];
 		?>
-		<p>Visit us at <?=$address?></p>
-		<a href="mailto:bonappetit@example.com">bonappetit@example.com</a><br>
-		<a href="tel:+1516-387-354-0925">Contact Us</a><br>
+		<p>Visit us at:</p><p><?= $address ?></p>
+		<div>Email us at <a href="mailto:bonappetit@example.com">bonappetit@example.com</a></div><br>
+		<div>Call us at <a href="tel:+1516-387-354-0925">516-387-354-0925</a></div><br>
 	</address>
 </footer>

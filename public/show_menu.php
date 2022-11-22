@@ -11,7 +11,7 @@
 <?php
 $qry_result = mysqli_query($conn, "SELECT * FROM menu_item")->fetch_all(MYSQLI_ASSOC);
 foreach($qry_result as $menu_item)	{
-	$edit_link = "/editmenuitem.php/?item={$menu_item['id']}";
+	$edit_link = "/editmenuitem.php?item={$menu_item['id']}";
 ?>
 	<tr>
 		<td><?= $menu_item['name'] ?></td>

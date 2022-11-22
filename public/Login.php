@@ -15,6 +15,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
+<div id="content">
 	<h1>Bon Appetit Paris Restaurant Mangement system - Login</h1>
 	<?php
 		// include our connect script
@@ -39,10 +40,12 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 			// make sure the required fileds were entered
 			if ($email != "" && $passwd != "") {
 				// query the database to see if the email exists
-				$query = mysqli_query($conn, "SELECT * FROM user WHERE email='{$email}'");
-				if (mysqli_num_rows($query) == 1) {
+				$query = "SELECT u.*, ut.name as user_type_name FROM user u left join user_type ut on u.user_type=ut.id WHERE email='{$email}'";
+				echo $query;
+				$result = mysqli_query($conn, $query);
+				if (mysqli_num_rows($result) == 1) {
 					// get the record from the query
-					$record = mysqli_fetch_assoc($query);
+					$record = mysqli_fetch_assoc($result);
 					// encrypt the user's passowrd
 					$passwd = md5($passwd);
 					// compare the passwords to make sure they are match
@@ -59,6 +62,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 							// IF YOU GET HERE THE USER CAN LOGIN
 							$_SESSION['email'] = $record['email'];
 							$_SESSION['userID'] = $record['id'];
+							$_SESSION['user_type_name'] = $record['user_type_name'];
 
 							$success = true;
 
@@ -101,5 +105,6 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 	</form>
 	
 	<?php require_once("Footer.php"); ?>
+</div>
 </body>
 </html>
