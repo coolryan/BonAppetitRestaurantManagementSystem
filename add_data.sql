@@ -1,3 +1,10 @@
+-- Filename: add_data.sql
+-- Author: Ryan Setaruddin
+-- BCS 350- Web Database Developement
+-- Professor Kaplan
+-- Date: Novermber 26, 2022
+-- Purpose: To insert specific data into these tables according to the owners
+
 INSERT INTO user_type (id, name) VALUES
 (1, "owner"),
 (2, "manager"),

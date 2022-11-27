@@ -1,3 +1,11 @@
+<!--
+Filename: show_menu.php
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: Novermber 26, 2022
+Purpose: To view the menu items
+-->
 <a href="/editmenuitem.php" class="button">New Menu Item</a>
 <a href="/menu.php" class="button">Preview Menu</a>
 <table>

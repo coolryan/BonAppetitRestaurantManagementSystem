@@ -4,7 +4,7 @@ Author: Ryan Setaruddin
 BCS 350- Web Database Developement
 Professor Kaplan
 Date: Oct. 11, 2022
-Purpose: To create a welcome homepage for Bon Appetit Paris restaurant management system
+Purpose: To create a welcome page for customers
 -->
 <!DOCTYPE html>
 <html>

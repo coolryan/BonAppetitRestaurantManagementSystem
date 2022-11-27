@@ -1,3 +1,11 @@
+<!--
+Filename: editmenu.php
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: November 26, 2022
+Purpose: To check if the edited menu is started by the restauarant staff
+-->
 <!DOCTYPE html>
 <html>
 <head>

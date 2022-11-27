@@ -1,3 +1,11 @@
+<!--
+Filename: view_reservation.php
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: November 26, 2022
+Purpose: To view the listed reservations by owners/managers
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +23,13 @@
 		$logged_in = isLoggedIn();
 
         // Todo: if not owner/mangaer can exit
+        $allowed = isOwner() || isManager();
+
+            if(!$allowed) {
+                echo "You shouldn't be here!";
+                include_once('Footer.php');
+                exit();
+            }
 
 		// Connect to MySQL
 		require_once("Connect.php");

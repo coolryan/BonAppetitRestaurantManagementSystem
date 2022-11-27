@@ -1,3 +1,11 @@
+<!--
+Filename: staff.php
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: November 26, 2022
+Purpose: To view the staffs by owners/managers
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +28,6 @@
 				include_once('Footer.php');
 				exit();
 			}
-
 			// Connect to MySQL
 			require_once("Connect.php");
 
@@ -57,10 +64,8 @@
 		</table>
 
 		<a href="/edit_staff.php">Add staff member</a>
-		<?php
-			// Footer 
-			require_once("Footer.php"); 
-		?>
+		<!-- Footer  -->
+		<?php require_once("Footer.php"); ?>
 	</div>
 </body>
 </html>

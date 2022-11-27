@@ -1,3 +1,11 @@
+<!--
+Filename: editmenuitem.php
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: November 26, 2022
+Purpose: To allow the owners/mamngers to edit the menu item from customers
+-->
 <!DOCTYPE html>
 <html>
 <head>

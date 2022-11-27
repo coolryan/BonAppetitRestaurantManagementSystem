@@ -1,3 +1,11 @@
+<!--
+Filename: utils.php
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: November 26, 2022
+Purpose: These are the function helpers 
+-->
 <?php
 	function test() {
 		return "The text is from the test";

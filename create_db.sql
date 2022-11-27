@@ -1,3 +1,10 @@
+-- Filename: create_db.sql
+-- Author: Ryan Setaruddin
+-- BCS 350- Web Database Developement
+-- Professor Kaplan
+-- Date: Novermber 26, 2022
+-- Purpose: To create databases and tables;
+
 CREATE DATABASE IF NOT EXISTS bonappetit;
 USE bonappetit;
 
