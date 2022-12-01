@@ -38,7 +38,6 @@ Purpose: To create a welcome page for customers
 	<b><h2>Our Story</h2></b>
 	<p><?= $qry_result['back_story']?></p>
 	<?php
-	//AT BOTTOM
 		include_once('Footer.php');
 	?>
 </div>

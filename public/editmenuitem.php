@@ -21,7 +21,6 @@ Purpose: To allow the owners/mamngers to edit the menu item from customers
 			require_once("Connect.php");
 			require_once("utils.php");
 			checkAndStartSession();
-			// phpinfo();
 
 			if (isset($_POST['name'])) {
 				$item_id = (empty($_POST['id'])) ? null : $_POST['id'];

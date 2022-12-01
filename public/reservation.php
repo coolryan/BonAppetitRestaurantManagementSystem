@@ -25,6 +25,7 @@ Purpose: To create reservation page for customers
             $logged_in = isLoggedIn();
 
             if (isset($_POST['name'])) {
+                
                 $reservation_id = (empty($_POST['reservation_id'])) ? null : $_POST['reservation_id'];
                 $party_size = $_POST['party_size'];
                 $name = $_POST['name'];
@@ -32,14 +33,21 @@ Purpose: To create reservation page for customers
                 $phone = $_POST['phone'];
                 $date = $_POST['reservation_date'];
                 $time = $_POST['reservation_time'];
+                $table_id = (!isset($_POST['table'])) ? null : $_POST['table'];
 
                 if($reservation_id == null) {
-                    $qry = "INSERT INTO reservation_table (party_size, name, email, phone, reservation_date, reservation_time) VALUES ({$party_size}, '{$name}', '{$email}', '{$phone}', '{$date}', '{$time}')";
+                    if($table_id !=null)
+                        $qry = "INSERT INTO reservation_table (party_size, patron_name, patron_email, patron_phone, reservation_date, reservation_time, restaurant_table_id) VALUES ({$party_size}, '{$name}', '{$email}', '{$phone}', '{$date}', '{$time}', '{$table_id}')";
+                    else
+                        $qry = "INSERT INTO reservation_table (party_size, patron_name, patron_email, patron_phone, reservation_date, reservation_time) VALUES ({$party_size}, '{$name}', '{$email}', '{$phone}', '{$date}', '{$time}')";
                 }
                 else {
-                    $qry = "UPDATE reservation_table SET party_size={$party_size}, name='{$name}', email='{$email}', phone='{$phone}', reservation_date= '{$date}',reservation_time= '{$time}'  WHERE reservation_id={$reservation_id}";
+                    if($table_id !=null)
+                        $qry = "UPDATE reservation_table SET party_size={$party_size}, patron_name='{$name}', patron_email='{$email}', patron_phone='{$phone}', reservation_date= '{$date}', reservation_time= '{$time}', restaurant_table_id= '{$table_id}' WHERE reservation_id={$reservation_id}";
+                    else
+                        $qry = "UPDATE reservation_table SET party_size={$party_size}, patron_name='{$name}', patron_email='{$email}', patron_phone='{$phone}', reservation_date= '{$date}', reservation_time= '{$time}' WHERE reservation_id={$reservation_id}";
                 }
-
+                echo $qry;
                 $qry_result = mysqli_query($conn, $qry);
                 if($qry_result) {
                     $success = True;
@@ -57,21 +65,24 @@ Purpose: To create reservation page for customers
                 $qry_result = mysqli_query($conn, "SELECT * FROM reservation_table where reservation_id= {$reservation_id}");
                 $restaurant_table = mysqli_fetch_assoc($qry_result);
                 $party_size = $restaurant_table["party_size"];
-                $name = $restaurant_table["name"];
-                $email = $restaurant_table["email"];
-                $phone = $restaurant_table["phone"];
+                $name = $restaurant_table["patron_name"];
+                $email = $restaurant_table["patron_email"];
+                $phone = $restaurant_table["patron_phone"];
                 $date = $restaurant_table["reservation_date"];
                 $time = $restaurant_table["reservation_time"];
+                $table_id = $restaurant_table["restaurant_table_id"];
             } 
             else {
                 $reservation_id = "";
                 $party_size = 0;
+                $table_id = null;
                 $name = "";
                 $email = "";
                 $phone = "";
                 $date = "";
                 $time = "";
             }
+
         ?>
         <form action="reservation.php" class="form" method="POST">
             <input type="hidden" name="reservation_id" value="<?=$reservation_id?>">
@@ -94,12 +105,24 @@ Purpose: To create reservation page for customers
             <label for="phone">Enter your phone number:</label>
             <input type="tel" id="phone" name="phone" value="<?=$phone?>" placeholder="Provide an phone" required>
 
+            <?php
+            if($logged_in) {
+                ?>
+                <label for="table">Assigned Table:</label>
+                <input type="number" id="table" name="table" value="<?=$table_id?>" placeholder="Assigned Table" required>
+                <?php
+            }
+            ?>
+
             <input type="submit" name="Submit">
         </form>
-        
-        <button><a href="view_reservations.php">Edit Reservation</a></button>
 
-        <?php require_once("Footer.php"); ?>
+        <?php 
+            if($logged_in) {
+                require_once("view_tables.php");
+            }
+            require_once("Footer.php");
+        ?>
     </div>
 </body>
 </html>

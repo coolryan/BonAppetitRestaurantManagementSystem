@@ -22,19 +22,9 @@ Purpose: These are the function helpers
 			return false;
 	}
 	function isOwner() {
-		// $is_owner = False;
-		// if(isLoggedIn()) {
-		// 	return $_SESSION['user_type_name']=="owner";
-		// }
-		// return $is_owner;
 		return checkRoles("owner");
 	}
 	function isManager() {
-		// $is_manager = False;
-		// if(isLoggedIn()) {
-		// 	return $_SESSION['user_type_name']=="manager";
-		// }
-		// return $is_manager;
 		return checkRoles("manager");
 	}
 	function isStaff() {
