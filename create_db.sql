@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS restaurant_table (
 	max_chairs INT NOT NULL,
 	restaurant_id INT NOT NULL,
 	UNIQUE (table_number, restaurant_id),
-	FOREIGN KEY (restaurant_id) REFERENCES restaurant(id)
+	FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
 );
 
 CREATE TABLE IF NOT EXISTS reservation_table (

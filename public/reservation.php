@@ -37,13 +37,15 @@ Purpose: To create reservation page for customers
 
                 if($reservation_id == null) {
                     if($table_id !=null)
-                        $qry = "INSERT INTO reservation_table (party_size, patron_name, patron_email, patron_phone, reservation_date, reservation_time, restaurant_table_id) VALUES ({$party_size}, '{$name}', '{$email}', '{$phone}', '{$date}', '{$time}', '{$table_id}')";
+                        // If we want to support more than one restaurants, this query will need to make sure the restaurant_table_id is from the right restaurant
+                        $qry = "INSERT INTO reservation_table (party_size, patron_name, patron_email, patron_phone, reservation_date, reservation_time, restaurant_table_id) VALUES ({$party_size}, '{$name}', '{$email}', '{$phone}', '{$date}', '{$time}', (SELECT restaurant_table_id FROM restaurant_table where table_number='{$table_id}'))";
                     else
                         $qry = "INSERT INTO reservation_table (party_size, patron_name, patron_email, patron_phone, reservation_date, reservation_time) VALUES ({$party_size}, '{$name}', '{$email}', '{$phone}', '{$date}', '{$time}')";
                 }
                 else {
                     if($table_id !=null)
-                        $qry = "UPDATE reservation_table SET party_size={$party_size}, patron_name='{$name}', patron_email='{$email}', patron_phone='{$phone}', reservation_date= '{$date}', reservation_time= '{$time}', restaurant_table_id= '{$table_id}' WHERE reservation_id={$reservation_id}";
+                        // If we want to support more than one restaurants, this query will need to make sure the restaurant_table_id is from the right restaurant
+                        $qry = "UPDATE reservation_table SET party_size={$party_size}, patron_name='{$name}', patron_email='{$email}', patron_phone='{$phone}', reservation_date= '{$date}', reservation_time= '{$time}', restaurant_table_id= (SELECT restaurant_table_id FROM restaurant_table where table_number='{$table_id}') WHERE reservation_id={$reservation_id}";
                     else
                         $qry = "UPDATE reservation_table SET party_size={$party_size}, patron_name='{$name}', patron_email='{$email}', patron_phone='{$phone}', reservation_date= '{$date}', reservation_time= '{$time}' WHERE reservation_id={$reservation_id}";
                 }
@@ -70,7 +72,7 @@ Purpose: To create reservation page for customers
                 $phone = $restaurant_table["patron_phone"];
                 $date = $restaurant_table["reservation_date"];
                 $time = $restaurant_table["reservation_time"];
-                $table_id = $restaurant_table["restaurant_table_id"];
+                $table_id = $restaurant_table["table_number"];
             } 
             else {
                 $reservation_id = "";

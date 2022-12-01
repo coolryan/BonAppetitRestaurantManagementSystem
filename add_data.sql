@@ -27,7 +27,7 @@ INSERT INTO restaurant (name, address, cuisine_type, back_story)
 VALUES ("Bon Appetiti","10th Street Ave, NYC, NY, 113642, USA", "American", "Ted and James Bradley were born and raised in New York City, NY. In early 1920s, they open the Bon Appetit Paris restaruarnt in small town of Glen Cove, NY. They always holding to tehir true motto The Best Food, The Best Restaurant. Many people loved so that they decide about it to their friends and family. Unforuntely, over the course of years since 1920s, they were grow tire the orginal location and decide to open up newer and better version the restaurant. but then the popularity went down due to the great depression. The orginal owners got sick and malnurshed during at the time and they decesse and the restuarnt was closed for long time. After many years had pass. Unknown new oweners some how gain the opportunity in 21th century and decide to create website about this restaurant and had modern day touches to it.");
 
 SET @rest_id = (select restaurant_id FROM restaurant LIMIT 1);
-INSERT INTO restaurant_table (restaurant_table_id, max_chairs, restaurant_id)
+INSERT INTO restaurant_table (table_number, max_chairs, restaurant_id)
 VALUES
 (1, 2, @rest_id),
 (2, 2, @rest_id),

@@ -70,7 +70,7 @@ function reservationsByDay($resv_by_table, $curr_time) {
 }
 
 // Currently we support only one restaurant. Needs to be updated if we want to support multiple restaurant locations.
-$qry = "SELECT rt.restaurant_table_id as table_id, max_chairs, rsv.party_size, "
+$qry = "SELECT rt.table_number as table_id, max_chairs, rsv.party_size, "
 	. "rsv.reservation_date, rsv.reservation_time, rsv.reservation_id "
 	. "FROM restaurant_table rt "
 	. "LEFT JOIN reservation_table rsv ON rt.restaurant_table_id = rsv.restaurant_table_id "
