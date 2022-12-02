@@ -15,6 +15,7 @@ Purpose: To view the listed reservations by owners/managers
 	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
+    <div id="content">
 	<?php
         // AT TOP
         require_once("Header.php");
@@ -26,5 +27,6 @@ Purpose: To view the listed reservations by owners/managers
         require_once("reservation_table.php");
         require_once("Footer.php");
     ?>
+    </div>
 </body>
 </html>

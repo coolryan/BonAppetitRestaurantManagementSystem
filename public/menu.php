@@ -39,12 +39,14 @@ Purpose: To create menu page for the customers
 
 			$category_order = array("Appetizers", "Main Dishes", "Desserts");
 
+			echo "<div id='menu'>";
+
 		foreach($category_order as $cat) {
 			$menu_items = $menu_by_cat[$cat];
 			if(!array_key_exists($cat, $menu_by_cat)) {
 				continue;
 			}
-			echo "<h4 class='menuCategory'>{$cat}</h4>";
+			echo "<div class='menucategory'> <div class='categoryheading'><h4>{$cat}</h4></div>";
 			foreach($menu_items as $menu_item) {
 	?>
 			<div class="menuItem">
@@ -60,7 +62,9 @@ Purpose: To create menu page for the customers
 			</div>
 	<?php
 			}
+			echo "</div>";
 		}
+		echo "</div>";
 
 			include_once('Footer.php'); 
 		?>

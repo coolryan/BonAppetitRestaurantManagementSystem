@@ -6,8 +6,10 @@ Professor Kaplan
 Date: Novermber 26, 2022
 Purpose: To view the menu items as a restaurant worker
 -->
-<a href="/editmenuitem.php" class="button">New Menu Item</a>
-<a href="/menu.php" class="button">Preview Menu</a>
+<div class="actionbtn">
+	<button><a href="/editmenuitem.php" class="button">New Menu Item</a></button>
+	<button><a href="/menu.php" class="button">Preview Menu</a></button>
+</div>
 <table>
 <tr>
 	<th>Menu Item</th>
