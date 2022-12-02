@@ -27,6 +27,7 @@ body {
 .Navbar-links a:link, a:visited{
 	color: darkslategray;
 }
+
 form {
 	position: relative;	
 	background-color: oldlace;
@@ -40,8 +41,13 @@ form input, label {
 	border-radius: 20px;
 }
 
-form input {
+form input[type=text], textarea {
+	width: 400px;
+}
+
+form input, textarea, select {
 	background-color: lightseagreen;
+	margin-bottom: 15px;
 }
 
 form label {
@@ -77,4 +83,9 @@ button {
 
 .reservationItem label {
 	display: inline;
+}
+
+.menuItemImage {
+	max-width: 25%;
+	height: auto;
 }

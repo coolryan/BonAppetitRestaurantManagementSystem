@@ -4,7 +4,7 @@ Author: Ryan Setaruddin
 BCS 350- Web Database Developement
 Professor Kaplan
 Date: Novermber 26, 2022
-Purpose: To view the menu items
+Purpose: To view the menu items as a restaurant worker
 -->
 <a href="/editmenuitem.php" class="button">New Menu Item</a>
 <a href="/menu.php" class="button">Preview Menu</a>
@@ -19,7 +19,7 @@ Purpose: To view the menu items
 <?php
 $qry_result = mysqli_query($conn, "SELECT * FROM menu_item")->fetch_all(MYSQLI_ASSOC);
 foreach($qry_result as $menu_item)	{
-	$edit_link = "/editmenuitem.php?item={$menu_item['id']}";
+	$edit_link = "/editmenuitem.php?item_id={$menu_item['id']}";
 ?>
 	<tr>
 		<td><?= $menu_item['name'] ?></td>

@@ -22,7 +22,7 @@ Purpose: To check if the edited menu is started by the restauarant staff
 		require_once("utils.php");
 		checkAndStartSession();
 
-		if (!empty($_SESSION['email'])) {
+		if (isManager() || isOwner() || isStaff()) {
 			include_once("show_menu.php");
 		} else {
 			echo "<p>This page is for restaurant staff only</p>";
