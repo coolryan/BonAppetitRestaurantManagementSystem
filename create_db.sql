@@ -85,5 +85,13 @@ CREATE TABLE IF NOT EXISTS reservation_table (
 	FOREIGN KEY (restaurant_table_id) REFERENCES restaurant_table(restaurant_table_id)  
 );
 
+CREATE TABLE IF NOT EXISTS staff_schedule (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	user_id INT NOT NULL,
+	start_datetime DATETIME NOT NULL,
+	end_datetime DATETIME NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
 create user 'bonappetit'@'localhost' identified by 'bonappetit';
 grant ALL on bonappetit.* to 'bonappetit'@'localhost';
