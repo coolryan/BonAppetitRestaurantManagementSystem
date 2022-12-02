@@ -38,6 +38,13 @@ Purpose: To create a welcome page for customers
 	<b><h2>Our Story</h2></b>
 	<p><?= $qry_result['back_story']?></p>
 	<?php
+		// Only if manager or admin
+		$isPrivileged = isOwner() || isManager();
+		if($isPrivileged) {
+			?><h3>Reservations</h3><a href="view_reservations.php">Edit Reservations</a><?php
+			include_once("reservation_table.php");
+		}
+
 		include_once('Footer.php');
 	?>
 </div>
