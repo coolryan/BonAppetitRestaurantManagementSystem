@@ -7,7 +7,7 @@ Date: December 1, 2022
 Purpose: To view tables at the restaurant
 -->
 <?php
-	if(isset($date))
+	if(isset($date) and !empty($date))
 		$curr_time = strtotime($date);
 	else
 		$curr_time = time();

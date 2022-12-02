@@ -34,8 +34,28 @@ Purpose: To view the listed reservations by owners/managers
 		// Connect to MySQL
 		require_once("Connect.php");
 
-        $qry_result = mysqli_query($conn, "SELECT * FROM reservation_table ORDER BY reservation_date, reservation_time DESC")->fetch_all(MYSQLI_ASSOC);
+        // Pagination details
+        $page_limit = 20;
+        if(!isset ($_GET['page']) ) {
+            $page_number = 1;
+        } else {
+            $page_number = $_GET['page'];
+        }
+        $initial_page = ($page_number-1) * $page_limit; 
+
+        $qry = "SELECT * FROM reservation_table ORDER BY reservation_date, reservation_time DESC";
+        $qry_result = mysqli_query($conn, $qry);
+
+        // Some pagination calculations based on results
+        $total_rows = mysqli_num_rows($qry_result);
+        $total_pages = ceil ($total_rows / $page_limit);
+
+        $qry = "SELECT * FROM reservation_table ORDER BY reservation_date, reservation_time DESC LIMIT " . $initial_page . ',' . $page_limit;
+        $qry_result = mysqli_query($conn, $qry);
+
+        $reservation_data = $qry_result->fetch_all(MYSQLI_ASSOC);
     ?>
+        <a href="/reservation.php" class="button">New Reservation</a>
         <table>
             <tr>
                 <th>Date</th>
@@ -47,7 +67,7 @@ Purpose: To view the listed reservations by owners/managers
                 <th>Phone</th>
             </tr>
     <?php 
-        foreach($qry_result as $reservation_item)  {
+        foreach($reservation_data as $reservation_item)  {
             $edit_link = "/reservation.php?reservation_id={$reservation_item['reservation_id']}";
             $date_time = "{$reservation_item['reservation_date']} {$reservation_item['reservation_time']}"; 
     ?>
@@ -62,8 +82,16 @@ Purpose: To view the listed reservations by owners/managers
             <td><?= $reservation_item['patron_phone'] ?></td>
             <td><a href='<?= $edit_link ?>'>Edit</a></td>
         </tr>
-    <?php } ?>
+    <?php
+        } 
+    ?>
     </table>
+    <?php
+        // show page number with link   
+        for($page_number = 1; $page_number<= $total_pages; $page_number++) {  
+            echo '<a href = "view_reservations.php?page=' . $page_number . '">' . $page_number . ' </a>';  
+        }
+    ?>
     <?php require_once("Footer.php");?>
 </body>
 </html>

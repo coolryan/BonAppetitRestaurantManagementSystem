@@ -49,7 +49,6 @@ Purpose: To create reservation page for customers
                     else
                         $qry = "UPDATE reservation_table SET party_size={$party_size}, patron_name='{$name}', patron_email='{$email}', patron_phone='{$phone}', reservation_date= '{$date}', reservation_time= '{$time}' WHERE reservation_id={$reservation_id}";
                 }
-                echo $qry;
                 $qry_result = mysqli_query($conn, $qry);
                 if($qry_result) {
                     $success = True;
