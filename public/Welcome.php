@@ -27,7 +27,7 @@ Purpose: To create a welcome page for customers
 		require_once("Connect.php");
 		$qry_result = mysqli_query($conn, "SELECT * FROM restaurant")->fetch_assoc();
 		$restaurantName = $qry_result['name'];
-		$restaurantID = $qry_result['id'];
+		$restaurantID = $qry_result['restaurant_id'];
 		if($logged_in) {
 	?>
 	<button><a href="/restaurant_info.php/?id=<?= $restaurantID ?>">Edit Restaurant</a></button>

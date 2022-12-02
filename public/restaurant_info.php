@@ -55,7 +55,7 @@
 			}
 			else if(!empty($_GET['id'])) {
 				$id = $_GET['id'];
-				$qry_result = mysqli_query($conn, "SELECT * FROM restaurant where id= {$id}");
+				$qry_result = mysqli_query($conn, "SELECT * FROM restaurant where restaurant_id= {$id}");
 				$restaurant = mysqli_fetch_assoc($qry_result);
 				$name = $restaurant["name"];
 				$address = $restaurant["address"];
@@ -74,16 +74,16 @@
 			<input type="hidden" name="id" value="<?=$id?>">
 
 			<label for="name">Name:</label>
-			<input type="text" name="name" value="<?=$name?>" autocomplete="off" required><br>
+			<input type="text" name="name" value="<?=$name?>" autocomplete="off" required>
 
 			<label for="address">Address:</label>
-			<input type="text" name="address" value="<?=$address?>" autocomplete="off" required><br>
+			<input type="text" name="address" value="<?=$address?>" autocomplete="off" required>
 
 			<label for="cuisine_type">Cuisine type:</label>
-			<input type="text" name="cuisine_type" value="<?=$cuisine_type?>" autocomplete="off" required><br>
+			<input type="text" name="cuisine_type" value="<?=$cuisine_type?>" autocomplete="off" required>
 
 			<label for="back_story">Back story:</label>
-			<input type="text" name="back_story" value="<?=$back_story?>" autocomplete="off" required>
+			<textarea rows="5" cols="50" name="back_story" value="<?=$back_story?>" autocomplete="off" required></textarea>
 
 			<input type="submit" name="Submit">
 		</form>

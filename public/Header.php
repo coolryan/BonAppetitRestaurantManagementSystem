@@ -14,6 +14,7 @@ Purpose: To create navigation bar for restaurant mangement system
 <?php
 	require_once("utils.php");
 	if(isLoggedIn()) {
+		echo '<a href="/restaurant_info.php">Restaurant Info</a>';
 		echo '<a href="/editmenu.php">Menu</a>';
 		echo '<a href="/staff.php">Staff</a>';
 		echo '<a href="">Inventory</a>';
@@ -23,7 +24,6 @@ Purpose: To create navigation bar for restaurant mangement system
 	else {
 		echo '<a href="/menu.php">Menu</a>';
 		echo '<a href="/reservation.php">Reservation</a>';
-		echo '<a href="/restaurant_info.php">Restaurant Info</a>';
 		echo '<a href="/Login.php">Login</a>';
 		echo '<a href="/Registration.php">Register</a>';
 	}

@@ -55,7 +55,7 @@ Purpose: To view the listed reservations by owners/managers
         <tr>
             <td><?= $reservation_item['reservation_date'] ?></td>
             <td><?= $reservation_item['reservation_time'] ?></td>
-            <td><?= $reservation_item['restaurant_table_id'] ?></td>
+            <td><?= $reservation_item['table_id'] ?></td>
             <td><?= $reservation_item['party_size'] ?></td>
             <td><?= $reservation_item['patron_name'] ?></td>
             <td><?= $reservation_item['patron_email'] ?></td>

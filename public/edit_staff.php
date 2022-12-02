@@ -100,13 +100,13 @@ Purpose: To edit the staff members and their status by owneers/maangers
 		<div class="container1">
 			<input name="user_id" type="hidden" value="<?= $user_id; ?>">
 			<label for="first_name">First Name</label>
-			<input type="text" name="first_name" value="<?= $first_name; ?>" autocomplete="off" required><br>
+			<input type="text" name="first_name" value="<?= $first_name; ?>" autocomplete="off" required>
 			<label for="last_name">Last Name</label>
-			<input type="text" name="last_name" value="<?= $last_name; ?>" autocomplete="off" required><br>
+			<input type="text" name="last_name" value="<?= $last_name; ?>" autocomplete="off" required>
 			<label for="email">Email</label>
-			<input type="text" name="email" value="<?= $email; ?>" autocomplete="off" required><br>
+			<input type="text" name="email" value="<?= $email; ?>" autocomplete="off" required>
 			<label for="phone">Phone</label>
-			<input type="text" name="phone" value="<?= $phone; ?>" autocomplete="off" required><br>
+			<input type="text" name="phone" value="<?= $phone; ?>" autocomplete="off" required>
 			<label for="user_type">User Type</label>
 			<select name="user_type" id="user_type">
 		<?php
@@ -117,12 +117,12 @@ Purpose: To edit the staff members and their status by owneers/maangers
 			<?php endforeach; ?>
 			</select><br>
 			<label for="status">Active</label>
-			<input type="checkbox" name="status" <?= $status ? "checked" : "" ?> /> <br>
+			<input type="checkbox" name="status" <?= $status ? "checked" : "" ?> />
 			<label for="date_created">Hire Date</label>
-			<input type="date" name="date_created" id="date_created" value="<?= $date_created; ?>" required> <br>
+			<input type="date" name="date_created" id="date_created" value="<?= $date_created; ?>" required>
 
-			<input type="submit" name="save" value="Save"><br>
-			<input type="button" name="cancel" value="Cancel" onClick="window.location.href='/editmenu.php';"><br>
+			<input type="submit" name="save" value="Save">
+			<input type="button" name="cancel" value="Cancel" onClick="window.location.href='/editmenu.php';">
 
 		</div>
 	</form>
