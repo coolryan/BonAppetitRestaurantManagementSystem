@@ -108,6 +108,10 @@ div.actionbtn button {
 	float: left;
 }
 
+div.actionbtn a {
+	text-decoration: none;
+}
+
 /* CSS for menu */
 #menu {
 	width: 75%;

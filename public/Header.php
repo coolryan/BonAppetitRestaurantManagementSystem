@@ -14,12 +14,12 @@ Purpose: To create navigation bar for restaurant mangement system
 <?php
 	require_once("utils.php");
 	if(isLoggedIn()) {
-		echo '<a href="/restaurant_info.php"><img src="images/icons/restaurant_info.png" alt="r_info"/Restaurant Info</a>';
-		echo '<a href="/editmenu.php"><img src="images/icons/restaurant_menu.png" alt="R_menu"/Menu</a>';
-		echo '<a href="/staff.php"><img src="images/icons/restaurant_staff.png" alt="R_staff"/Staff</a>';
-		echo '<a href="">Inventory</a>';
+		echo '<a href="/restaurant_info.php"><img src="images/icons/restaurant_info.png" alt="r_info"/>Restaurant Info</a>';
+		echo '<a href="/editmenu.php"><img src="images/icons/restaurant_menu.png" alt="R_menu"/>Menu</a>';
+		echo '<a href="/staff.php"><img src="images/icons/restaurant_staff.png" alt="R_staff"/>Staff</a>';
+		// echo '<a href="">Inventory</a>';
 		echo '<a href="view_reservations.php"><img src="images/icons/reservation.png" alt="Reserve"/>Reservations</a>';
-		echo '<a href="/Logout.php">Logout</a>';
+		echo '<a href="/Logout.php"><img src="images/icons/logout.png" alt="logout"/>Logout</a>';
 	}
 	else {
 		echo '<a href="/menu.php"><img src="images/icons/restaurant_menu.png" alt="R_menu"/>Menu</a>';

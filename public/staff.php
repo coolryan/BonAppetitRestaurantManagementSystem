@@ -32,6 +32,9 @@ Purpose: To view the staffs by owners/managers
 			require_once("Connect.php");
 
 		?>
+		<div class="actionbtn">
+			<button><a href="/edit_staff.php">Add staff member</a></button>
+		</div>
 		<table>
 			<tr>
 				<th>Name</th>
@@ -62,8 +65,6 @@ Purpose: To view the staffs by owners/managers
 			}
 		?>
 		</table>
-
-		<a href="/edit_staff.php">Add staff member</a>
 		<!-- Footer  -->
 		<?php require_once("Footer.php"); ?>
 	</div>

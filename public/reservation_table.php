@@ -45,7 +45,9 @@
 
     if($show_edit) {
         ?>
-        <a href="/reservation.php" class="button">New Reservation</a>
+        <div class="actionbtn">
+            <button><a href="/reservation.php" class="button">New Reservation</a></button>
+        </div>
         <?php
     }
 ?>
