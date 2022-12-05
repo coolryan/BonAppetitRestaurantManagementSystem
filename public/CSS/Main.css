@@ -1,12 +1,13 @@
 body {
 	background: honeydew;
+	margin: 0px;
 }
 /*CSS for navigation*/
 .Navbar {
 	background-color: lavender;
 	padding: 5px;
 	border: 2px solid black;
-	margin-bottom: 10px;
+	margin: 10px;
 	border-radius: 20px;
 }
 
@@ -26,6 +27,10 @@ body {
 
 .Navbar-links a:link, a:visited{
 	color: darkslategray;
+}
+.Navbar img {
+	width: 50px;
+	height: auto;
 }
 /*CSS for forms*/
 form {
@@ -60,16 +65,20 @@ form label {
 }
 
 footer {
-/*	position: absolute;*/
 	position: fixed;
 	padding: 10px;
-	margin-top: 20px;
+	margin: 10px;
 	bottom:0;
-   	width:100%;
+   	width: 98%;
    	height:150px;
 	background-color: lightgreen;
-/*	display: inline-block;*/
 	border-radius: 20px;
+}
+
+footer img {
+	width: 140px;
+	height: auto;
+	float: left;
 }
 
 button {
