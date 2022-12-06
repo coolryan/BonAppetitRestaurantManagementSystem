@@ -41,9 +41,6 @@ body {
 	width: 50px;
 	height: auto;
 }
-.Navbar-links nav li ul {
-	list-style-type: none;
-}
 /*CSS for forms*/
 form {
 	position: relative;	
