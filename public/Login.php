@@ -60,6 +60,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 								mysqli_query($conn, $qry);
 
 								// IF YOU GET HERE THE USER CAN LOGIN
+								$_SESSION['user_id'] = $record['id'];
 								$_SESSION['email'] = $record['email'];
 								$_SESSION['userID'] = $record['id'];
 								$_SESSION['user_type_name'] = $record['user_type_name'];
