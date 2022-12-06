@@ -12,12 +12,13 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Bon Appetit Paris Restaurant Mangement system | registration form</title>
-	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
+	<style type="text/css"><?php include 'CSS/Main.css';?></style>
 </head>
 <body>
 	<div id="content">
-		<h1>Bon Appetit Paris Restaurant Mangement System-Register</h1><br>
+		<!-- Header -->
 		<?php require_once("Header.php");?>
+		<h1>Register</h1>
 		<h2><b>Create Owner account</b></h2>
 		<?php
 			// include our connect script
@@ -109,6 +110,7 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 				echo "Do nothing";
 			}
 		?>
+		<!-- Register form will take user's input -->
 		<form action="Registration.php" class="registerForm" method="POST" id="registerForm">
 			<label for="fname">First Name:</label>
 			<input type="text" name="fname" value="" autocomplete="off" required><br>
@@ -126,8 +128,9 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 			<label for="confirm_password">Confirrm password:</label>
 			<input type="password" name="confirm_password" value="" placeholder="confirm your password" autocomplete="off" required><br>
 			<input type="submit" name="registerBtn" value="Create Owner account"><br>
-			<p>Already have an account?<button><a href="Login.php">Login here</a></button></p>
+			<p>Already have an account?<div class="actionbtn"><button><a href="Login.php" class="button">Login here</a></button></div></p>
 		</form>
+		<!-- Footer -->
 		<?php require_once("Footer.php");?>
 	</div>
 </body>

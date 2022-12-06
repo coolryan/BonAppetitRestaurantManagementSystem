@@ -1,12 +1,22 @@
+/*
+Filename: Main.css
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: December 5, 2022
+Purpose: To CSS for whole website
+*/
+
 body {
 	background: honeydew;
+	margin: 0px;
 }
-
+/*CSS for navigation bar*/
 .Navbar {
 	background-color: lavender;
 	padding: 5px;
 	border: 2px solid black;
-	margin-bottom: 10px;
+	margin: 10px;
 	border-radius: 20px;
 }
 
@@ -27,7 +37,11 @@ body {
 .Navbar-links a:link, a:visited{
 	color: darkslategray;
 }
-
+.Navbar img {
+	width: 50px;
+	height: auto;
+}
+/*CSS for forms*/
 form {
 	position: relative;	
 	background-color: oldlace;
@@ -53,36 +67,87 @@ form input, textarea, select {
 form label {
 	margin-bottom: 5px;
 }
+/*CSS for content*/
 #content {
 	padding-bottom: 150px;
+	text-align: center;
 }
+/*CSS for footer*/
 footer {
-	position: absolute;
+	position: fixed;
 	padding: 10px;
-	margin-top: 20px;
-/*	bottom:0;*/
-   	width:100%;
+	margin: 10px;
+	bottom:0;
+   	width: 98%;
    	height:150px;
 	background-color: lightgreen;
-/*	display: inline-block;*/
-/*	border-radius: 20px;*/
+	border-radius: 20px;
 }
 
+footer img {
+	width: 140px;
+	height: auto;
+	float: left;
+}
+/*CSS for button*/
 button {
 	background-color: lavender;
 	border-radius: 20px;
 	float: right;
 }
-
+/*CSS for messages*/
 .error {
 	color: red;
 }
 .success {
 	color: green;
 }
-
+/*CSS for reservation items*/
 .reservationItem label {
 	display: inline;
+}
+
+/*CSS for action buttons*/
+
+div.actionbtn {
+	text-decoration: none;
+	display: inline-block;
+}
+
+div.actionbtn button {
+	float: left;
+}
+
+div.actionbtn a {
+	text-decoration: none;
+}
+
+/* CSS for menu */
+#menu {
+	width: 75%;
+	margin: auto;
+}
+.menucategory {
+	padding: 20px 0px 30px 0px;
+}
+.menucategory:nth-child(even) {
+	background-color: lightgreen;
+	border-radius: 20px;
+}
+
+.menucategory:nth-child(odd) {
+	background-color: white;
+}
+.menucategory .categoryheading {
+	margin-bottom: 20px;
+	font-family: cursive;
+	font-size: 30px;
+}
+.menucategory .menuItem {
+	margin-bottom: 15px;
+}
+.menucategory .menuItem div {
+	text-transform: capitalize;
 }
 
 .menuItemImage {

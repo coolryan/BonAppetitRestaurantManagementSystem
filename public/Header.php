@@ -10,22 +10,22 @@ Purpose: To create navigation bar for restaurant mangement system
 <div class="Navbar">
 	<div class="Navbar-links">
 		<header>
-			<a href="/Welcome.php">Home</a>
+			<a href="/Welcome.php"><img src="images/icons/home.png" alt="Home"/>Home</a>
 <?php
 	require_once("utils.php");
 	if(isLoggedIn()) {
-		echo '<a href="/restaurant_info.php">Restaurant Info</a>';
-		echo '<a href="/editmenu.php">Menu</a>';
-		echo '<a href="/staff.php">Staff</a>';
-		echo '<a href="">Inventory</a>';
-		echo '<a href="view_reservations.php">Reservations</a>';
-		echo '<a href="/Logout.php">Logout</a>';
+		echo '<a href="/restaurant_info.php"><img src="images/icons/restaurant_info.png" alt="r_info"/>Restaurant Info</a>';
+		echo '<a href="/editmenu.php"><img src="images/icons/restaurant_menu.png" alt="R_menu"/>Menu</a>';
+		echo '<a href="/staff.php"><img src="images/icons/restaurant_staff.png" alt="R_staff"/>Staff</a>';
+		// echo '<a href="">Inventory</a>';
+		echo '<a href="view_reservations.php"><img src="images/icons/reservation.png" alt="Reserve"/>Reservations</a>';
+		echo '<a href="/Logout.php"><img src="images/icons/logout.png" alt="logout"/>Logout</a>';
 	}
 	else {
-		echo '<a href="/menu.php">Menu</a>';
-		echo '<a href="/reservation.php">Reservation</a>';
-		echo '<a href="/Login.php">Login</a>';
-		echo '<a href="/Registration.php">Register</a>';
+		echo '<a href="/menu.php"><img src="images/icons/restaurant_menu.png" alt="R_menu"/>Menu</a>';
+		echo '<a href="/reservation.php"><img src="images/icons/reservation.png" alt="Reserve"/>Reservation</a>';
+		echo '<a href="/Login.php"><img src="images/icons/login.png" alt="Login"/>Login</a>';
+		echo '<a href="/Registration.php"><img src="images/icons/register.png" alt="register"/>Register</a>';
 	}
 ?>
 		</header>

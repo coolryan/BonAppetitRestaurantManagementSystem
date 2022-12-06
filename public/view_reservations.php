@@ -12,9 +12,10 @@ Purpose: To view the listed reservations by owners/managers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>View Reservation Page</title>
-	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
+	<style type="text/css"><?php include 'CSS/Main.css';?></style>
 </head>
 <body>
+    <div id="content">
 	<?php
         // AT TOP
         require_once("Header.php");
@@ -26,5 +27,6 @@ Purpose: To view the listed reservations by owners/managers
         require_once("reservation_table.php");
         require_once("Footer.php");
     ?>
+    </div>
 </body>
 </html>

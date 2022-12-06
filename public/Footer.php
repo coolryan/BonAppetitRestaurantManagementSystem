@@ -7,6 +7,7 @@ Date: Oct. 11, 2022
 Purpose: For side note to knowing who created this app
 -->
 <footer>
+	<img src="images/icons/restaurant_logo.png" alt="restaurant_logo">
 	<hr>
 	<address>
 		<?php

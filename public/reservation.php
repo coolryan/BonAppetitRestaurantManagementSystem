@@ -12,7 +12,7 @@ Purpose: To create reservation page for customers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Reservation Page</title>
-	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
+	<style type="text/css"><?php include 'CSS/Main.css';?></style>
 </head>
 <body>
     <div id="content">
@@ -23,6 +23,9 @@ Purpose: To create reservation page for customers
             require_once("utils.php");
             checkAndStartSession();
             $logged_in = isLoggedIn();
+        ?>
+        <h1>Reservation</h1>
+        <?php
 
             if (isset($_POST['name'])) {
                 
@@ -83,8 +86,8 @@ Purpose: To create reservation page for customers
                 $date = "";
                 $time = "";
             }
-
         ?>
+        <!-- Rservation form will take the user's input -->
         <form action="reservation.php" class="form" method="POST">
             <input type="hidden" name="reservation_id" value="<?=$reservation_id?>">
 
@@ -106,15 +109,15 @@ Purpose: To create reservation page for customers
             <label for="phone">Enter your phone number:</label>
             <input type="tel" id="phone" name="phone" value="<?=$phone?>" placeholder="Provide an phone" required>
 
-            <?php
+        <!-- Checking if the login is successfully then it assigns a table-->
+        <?php
             if($logged_in) {
-                ?>
-                <label for="table">Assigned Table:</label>
-                <input type="number" id="table" name="table" value="<?=$table_id?>" placeholder="Assigned Table" required>
-                <?php
+        ?>
+            <label for="table">Assigned Table:</label>
+            <input type="number" id="table" name="table" value="<?=$table_id?>" placeholder="Assigned Table" required>
+        <?php
             }
-            ?>
-
+        ?>
             <input type="submit" name="Submit">
         </form>
 
@@ -122,6 +125,7 @@ Purpose: To create reservation page for customers
             if($logged_in) {
                 require_once("view_tables.php");
             }
+            // Footer
             require_once("Footer.php");
         ?>
     </div>

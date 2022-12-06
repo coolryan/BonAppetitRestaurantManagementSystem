@@ -12,7 +12,7 @@ Purpose: To view the staffs by owners/managers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Staff page</title>
-	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
+	<style type="text/css"><?php include 'CSS/Main.css';?></style>
 </head>
 <body>
 	<div id="content">
@@ -32,6 +32,9 @@ Purpose: To view the staffs by owners/managers
 			require_once("Connect.php");
 
 		?>
+		<div class="actionbtn">
+			<button><a href="/edit_staff.php">Add staff member</a></button>
+		</div>
 		<table>
 			<tr>
 				<th>Name</th>
@@ -62,8 +65,6 @@ Purpose: To view the staffs by owners/managers
 			}
 		?>
 		</table>
-
-		<a href="/edit_staff.php">Add staff member</a>
 		<!-- Footer  -->
 		<?php require_once("Footer.php"); ?>
 	</div>

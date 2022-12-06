@@ -12,11 +12,10 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login page</title>
-	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
+	<style type="text/css"><?php include 'CSS/Main.css';?></style>
 </head>
 <body>
 	<div id="content">
-		<h1>Bon Appetit Paris Restaurant Mangement system - Login</h1>
 		<?php
 			// include our connect script
 			require_once("Header.php");
@@ -29,9 +28,10 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 				// redirect the user to the Home page
 				header("Location: Welcome.php");
 			}
-
+		?>
+		<h1>Login</h1>
+		<?php
 			// check to see if the user clicked the login buttion
-			
 			if (!empty($_POST['loginBtn'])) {
 				// get the form data for processing
 				$email = $_POST['email'];
@@ -91,6 +91,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 				echo "<font color='red'>".$error_msg."</font>";
 			}
 		?>
+		<!-- Login Form will take the usre's inputs -->
 		<form action="Login.php" method="POST" name="loginForm" id="loginForm">
 			<table>
 				<tr><td>Email: <font color="red">*</font></td></tr>
@@ -103,6 +104,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 				</td></tr>
 			</table>
 		</form>
+		<!-- Footer -->
 		<?php require_once("Footer.php"); ?>
 	</div>
 </body>

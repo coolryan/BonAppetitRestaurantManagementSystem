@@ -125,7 +125,7 @@ INSERT INTO reservation_table (party_size, reservation_date, reservation_time, p
 (10, "2022-11-29", "17:30:00", "Natalie Davis", "1231231234", "natalie@davis.com", 17),
 (2, "2022-11-30", "16:30:00", "Chase Diaz", "123121324", "Chase@Diaz.com", 1),
 (2, "2022-11-30", "7:30:00", "Miracle Houston", "123121324", "Miracle@Houston.com", 1),
-(5, "2022-11-30", "14:20:00", "Adeline Stewart", "123121324", "Adeline@Stewart.com", 9)
+(5, "2022-11-30", "14:20:00", "Adeline Stewart", "123121324", "Adeline@Stewart.com", 9),
 (4, "2022-12-01", "18:24:00", "Steven Ford", "1231231234", "steve@ford.com", 9),
 (7, "2022-12-02", "08:32:00", "Bob Greenly", "213123523566", "bob@greenly.com", 17),
 (5, "2022-12-01", "19:45:00", "Juan Juancho", "1231231234", "juan@juancho.com", 9);
