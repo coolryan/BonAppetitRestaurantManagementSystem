@@ -68,14 +68,14 @@ Purpose: To edit the staff members and their status by owneers/maangers
 				$qry_result = mysqli_query($conn, $qry);
 				if($qry_result) {
 					$success = True;
-					$qry_result = mysqli_query($conn, "SELECT id, date_Created FROM user where email= {$email}");
+					$qry_result = mysqli_query($conn, "SELECT id, date_created FROM user where email= {$email}");
 					$user_data = mysqli_fetch_assoc($qry_result);
 					$date_created = date("Y-m-d", strtotime($user_data["date_created"]));
 					$user_id = $user_data['id'];
 				}
 			} else if(!empty($_GET['user_id'])) {
 				$user_id = $_GET['user_id'];
-				$qry = "SELECT u.*, user_type.name as user_type FROM user u left join user_type ON u.user_type=user_type.id where u.id= {$user_id}";
+				$qry = "SELECT u.*, user_type.name as user_type FROM user u left join user_type ON u.user_type=user_type.id WHERE u.id= {$user_id}";
 				$qry_result = mysqli_query($conn, $qry);
 				$user_data = mysqli_fetch_assoc($qry_result);
 				$email = $user_data["email"];

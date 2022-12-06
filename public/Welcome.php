@@ -50,10 +50,14 @@ Purpose: To create a welcome page for customers
 		</div>
 		<?php
 			include_once("reservation_table.php");
-			}
-			// Footer
-			include_once('Footer.php');
-		?>
-	</div>
+
+			?><h3>Staff Schedule</h3><a href="staff/view_schedule.php">Edit Schedules</a><?php
+			include_once("staff/schedule_table.php");
+		}
+
+		include_once('Footer.php');
+	?>
+</div>
+
 </body>
 </html>
