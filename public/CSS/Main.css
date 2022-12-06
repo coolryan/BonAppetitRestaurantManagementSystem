@@ -1,8 +1,17 @@
+/*
+Filename: Main.css
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: December 5, 2022
+Purpose: To CSS for whole website
+*/
+
 body {
 	background: honeydew;
 	margin: 0px;
 }
-/*CSS for navigation*/
+/*CSS for navigation bar*/
 .Navbar {
 	background-color: lavender;
 	padding: 5px;
@@ -31,6 +40,9 @@ body {
 .Navbar img {
 	width: 50px;
 	height: auto;
+}
+.Navbar-links nav li ul {
+	list-style-type: none;
 }
 /*CSS for forms*/
 form {
@@ -63,7 +75,7 @@ form label {
 	padding-bottom: 150px;
 	text-align: center;
 }
-
+/*CSS for footer*/
 footer {
 	position: fixed;
 	padding: 10px;
@@ -80,24 +92,25 @@ footer img {
 	height: auto;
 	float: left;
 }
-
+/*CSS for button*/
 button {
 	background-color: lavender;
 	border-radius: 20px;
 	float: right;
 }
-
+/*CSS for messages*/
 .error {
 	color: red;
 }
 .success {
 	color: green;
 }
+/*CSS for reservation items*/
 .reservationItem label {
 	display: inline;
 }
 
-/*CSS for admin pages*/
+/*CSS for action buttons*/
 
 div.actionbtn {
 	text-decoration: none;

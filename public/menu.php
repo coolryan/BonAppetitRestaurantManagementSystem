@@ -12,7 +12,7 @@ Purpose: To create menu page for the customers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Menu Page</title>
-	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
+	<style type="text/css"><?php include 'CSS/Main.css';?></style>
 </head>
 <body>
 	<div id="content">
@@ -21,7 +21,9 @@ Purpose: To create menu page for the customers
 			require_once("Connect.php");
 			require_once("utils.php");
 			checkAndStartSession();
-
+		?>
+		<h1>Menu</h1>
+		<?php
 			function getByCategory($qry_result) {
 				$menu_by_cat = array();
 				foreach($qry_result as $menu_item) {
@@ -48,19 +50,19 @@ Purpose: To create menu page for the customers
 			}
 			echo "<div class='menucategory'> <div class='categoryheading'><h4>{$cat}</h4></div>";
 			foreach($menu_items as $menu_item) {
-	?>
+		?>
 			<div class="menuItem">
 				<div class="menuItemName"><?= $menu_item["name"]; ?></div>
 				<div class="menuItemPrice"><?= $menu_item["price"]; ?></div>
 				<div class="menuItemDescription"><?= $menu_item["description"]; ?></div>
-				<?php
-					if(!empty($menu_item["image_path"])) {
-						$img = "<img class='menuItemImage' src='{$menu_item["image_path"]}'>";
-						echo $img;
-					}
-				?>
+		<?php
+			if(!empty($menu_item["image_path"])) {
+				$img = "<img class='menuItemImage' src='{$menu_item["image_path"]}'>";
+				echo $img;
+			}
+		?>
 			</div>
-	<?php
+		<?php
 			}
 			echo "</div>";
 		}

@@ -12,41 +12,48 @@ Purpose: To create a welcome page for customers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Home Page</title>
-	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
+	<style type="text/css"><?php include 'CSS/Main.css';?></style>
 </head>
 <body>
-<div id="content">
-	<?php
-		// AT TOP
-		require_once("Header.php");
-		require_once("utils.php");
-		checkAndStartSession();
-		$logged_in = isLoggedIn();
+	<div id="content">
+		<?php
+			// AT TOP
+			require_once("Header.php");
+			require_once("utils.php");
+			checkAndStartSession();
+			$logged_in = isLoggedIn();
 
-		//include our connect
-		require_once("Connect.php");
-		$qry_result = mysqli_query($conn, "SELECT * FROM restaurant")->fetch_assoc();
-		$restaurantName = $qry_result['name'];
-		$restaurantID = $qry_result['restaurant_id'];
-		if($logged_in) {
-	?>
-	<button><a href="/restaurant_info.php/?id=<?= $restaurantID ?>">Edit Restaurant</a></button>
-	<?php
-		}
-	?>
-	<h1>Welcome To <?= $restaurantName ?></h1>
-	<b><h2>Our Story</h2></b>
-	<p><?= $qry_result['back_story']?></p>
-	<?php
-		// Only if manager or admin
-		$isPrivileged = isOwner() || isManager();
-		if($isPrivileged) {
-			?><h3>Reservations</h3><a href="view_reservations.php">Edit Reservations</a><?php
+			//include our connect
+			require_once("Connect.php");
+			$qry_result = mysqli_query($conn, "SELECT * FROM restaurant")->fetch_assoc();
+			$restaurantName = $qry_result['name'];
+			$restaurantID = $qry_result['restaurant_id'];
+			if($logged_in) {
+		?>
+		<button><a href="/restaurant_info.php/?id=<?= $restaurantID ?>">Edit Restaurant</a></button>
+		<?php
+			}
+		?>
+		<h1>Welcome To <?= $restaurantName ?></h1>
+		<b><h2>Here's Our Story</h2></b>
+		<p><?= $qry_result['back_story']?></p>
+		<?php
+			// Only if manager or admin
+			$isPrivileged = isOwner() || isManager();
+			if($isPrivileged) {
+		?>
+		<h3>Reservations</h3>
+		<div class="actionbtn">
+			<button>
+				<a href="view_reservations.php" class="button">Edit Reservations</a>
+			</button>
+		</div>
+		<?php
 			include_once("reservation_table.php");
-		}
-
-		include_once('Footer.php');
-	?>
-</div>
+			}
+			// Footer
+			include_once('Footer.php');
+		?>
+	</div>
 </body>
 </html>
