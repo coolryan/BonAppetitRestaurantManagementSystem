@@ -154,3 +154,10 @@ div.actionbtn a {
 	max-width: 25%;
 	height: auto;
 }
+.menuItemName {
+	display: inline-block;
+}
+.addOrderButton {
+	float: none;
+	display: inline-block;
+}

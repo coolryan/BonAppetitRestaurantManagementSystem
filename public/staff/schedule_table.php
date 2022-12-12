@@ -1,3 +1,11 @@
+<!--
+Filename: schedule_table.php
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: December 1, 2022
+Purpose: Show all staff schedule in a paginated table.
+-->
 <?php  
 	// Header
 	require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
