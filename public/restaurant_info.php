@@ -16,8 +16,8 @@
 			$logged_in = isLoggedIn();
 
 			if(!$logged_in) {
-				require_once("Unauthorized_access.php");
-				require_once("Footer.php");
+				require_once($_SERVER['DOCUMENT_ROOT']."/Unauthorized_access.php");
+				require_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
 				exit();		
 			}
 
@@ -89,7 +89,7 @@
 		</form>
 
 		<?php
-			require_once("Footer.php"); 
+			require_once($_SERVER['DOCUMENT_ROOT']."/Footer.php"); 
 		?>
 	</div>
 </body>

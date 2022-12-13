@@ -131,7 +131,7 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 			<p>Already have an account?<div class="actionbtn"><button><a href="Login.php" class="button">Login here</a></button></div></p>
 		</form>
 		<!-- Footer -->
-		<?php require_once("Footer.php");?>
+		<?php require_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");?>
 	</div>
 </body>
 </html>

@@ -105,7 +105,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 			</table>
 		</form>
 		<!-- Footer -->
-		<?php require_once("Footer.php"); ?>
+		<?php require_once($_SERVER['DOCUMENT_ROOT']."/Footer.php"); ?>
 	</div>
 </body>
 </html>

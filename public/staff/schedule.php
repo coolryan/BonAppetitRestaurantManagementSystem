@@ -17,10 +17,10 @@ Purpose: To create/view/edit staff schedules
 <body>
     <div id="content">
         <?php
-            require_once("../Connect.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
             // Header
-            require_once("../Header.php");
-            require_once("../utils.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
             checkAndStartSession();
             $logged_in = isLoggedIn();
 

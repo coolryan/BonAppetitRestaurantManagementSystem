@@ -25,7 +25,7 @@ Purpose: To view the listed reservations by owners/managers
         // To make sure editing is allowed in reservation_Table page:
         $allow_editing = True;
         require_once("reservation_table.php");
-        require_once("Footer.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
     ?>
     </div>
 </body>

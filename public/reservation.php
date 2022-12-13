@@ -123,10 +123,10 @@ Purpose: To create reservation page for customers
 
         <?php 
             if($logged_in) {
-                require_once("view_tables.php");
+                require_once($_SERVER['DOCUMENT_ROOT']."/view_tables.php");
             }
             // Footer
-            require_once("Footer.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
         ?>
     </div>
 </body>

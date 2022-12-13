@@ -66,7 +66,7 @@ Purpose: To view the staffs by owners/managers
 		?>
 		</table>
 		<!-- Footer  -->
-		<?php require_once("Footer.php"); ?>
+		<?php require_once($_SERVER['DOCUMENT_ROOT']."/Footer.php"); ?>
 	</div>
 </body>
 </html>
