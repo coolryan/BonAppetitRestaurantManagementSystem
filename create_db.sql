@@ -3,7 +3,7 @@
 -- BCS 350- Web Database Developement
 -- Professor Kaplan
 -- Date: Novermber 26, 2022
--- Purpose: To create databases and tables;
+-- Purpose: To create databases and tables
 
 CREATE DATABASE IF NOT EXISTS bonappetit;
 USE bonappetit;
@@ -27,15 +27,17 @@ CREATE TABLE IF NOT EXISTS user (
 	FOREIGN KEY (user_type) REFERENCES user_type(id)
 );
 
+-- Categories to separate menu items
 CREATE TABLE IF NOT EXISTS menu_category (
 	name varchar(50) NOT NULL PRIMARY KEY
 );
 
+-- Items available on the meu
 CREATE TABLE IF NOT EXISTS menu_item (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name varchar(30) NOT NULL,
 	description varchar(250) DEFAULT NULL,
-	price  DECIMAL(10,2) NOT NULL,
+	price DECIMAL(10,2) NOT NULL,
 	active TINYINT NOT NULL DEFAULT 1,
 	category varchar(50) NOT NULL,
 	image_path varchar(100),
@@ -64,6 +66,7 @@ CREATE TABLE IF NOT EXISTS restaurant (
 	back_story varchar(1500) NOT NULL
 );
 
+-- Tables available at restaurants
 CREATE TABLE IF NOT EXISTS restaurant_table (
 	restaurant_table_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	table_number INT NOT NULL,
@@ -73,6 +76,7 @@ CREATE TABLE IF NOT EXISTS restaurant_table (
 	FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
 );
 
+-- Reservations for eating at the restaurant
 CREATE TABLE IF NOT EXISTS reservation_table (
 	reservation_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	party_size INT NOT NULL,
@@ -91,6 +95,27 @@ CREATE TABLE IF NOT EXISTS staff_schedule (
 	start_datetime DATETIME NOT NULL,
 	end_datetime DATETIME NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE IF NOT EXISTS meal_order (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	restaurant_table_id INT DEFAULT NULL,
+	in_store TINYINT NOT NULL DEFAULT 1,
+	server_id INT DEFAULT NULL,
+	order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	tip DECIMAL(10,2) NOT NULL,
+	FOREIGN KEY (server_id) REFERENCES user(id),
+	FOREIGN KEY (restaurant_table_id) REFERENCES restaurant_table(restaurant_table_id)
+);
+
+-- Specific items related to an order
+CREATE TABLE IF NOT EXISTS meal_order_menu_item (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	meal_order_id INT NOT NULL,
+	menu_item_id INT,
+	instructions varchar(250) DEFAULT NULL,
+	FOREIGN KEY (meal_order_id) REFERENCES meal_order(id),
+	FOREIGN KEY (menu_item_id) REFERENCES menu_item(id)
 );
 
 create user 'bonappetit'@'localhost' identified by 'bonappetit';

@@ -7,6 +7,8 @@ Date: December 1, 2022
 Purpose: To view tables at the restaurant
 -->
 <?php
+// Get the current time in a calendar friendly format. This will be used at the top of the page
+// Along with figuring out which reservations to show in the list of restaurant tables
 	if(isset($date) and !empty($date))
 		$curr_time = strtotime($date);
 	else
@@ -23,16 +25,20 @@ Purpose: To view tables at the restaurant
 </tr>
 
 <?php
+// This class helps us organize a restaurant table with any reservations it has assigned to it.
 class RestaurantTable {
 	public $table_id;
 	public $max_chairs;
 	public $reservations = array();
 }
+// Separate the reservations by tables
 function getByTable($qry_result) {
 	$resv_by_table = array();
 	foreach($qry_result as $table_item) {
 		$table_id = $table_item['table_id'];
 
+		// Create a new RestaurantTable object if this is the first instance of this table in the
+		// reservation list.
 		if(!array_key_exists($table_id, $resv_by_table)) {
 			$rest_table = new RestaurantTable();
 			$rest_table->table_id = $table_id;
@@ -40,11 +46,13 @@ function getByTable($qry_result) {
 			$resv_by_table[$table_id] = $rest_table;
 		}
 		if(!empty($table_item["reservation_date"])) {
+			// Add the reservation to the table's reservation list
 			array_push($resv_by_table[$table_id]->reservations, $table_item);	
 		}
 	}
 	return $resv_by_table;
 }
+// Find the reservations relevant for a given day
 function reservationsByDay($resv_by_table, $curr_time) {
 	$curr_year = date('Y', $curr_time);
 	$curr_month = date('m', $curr_time);
@@ -60,7 +68,9 @@ function reservationsByDay($resv_by_table, $curr_time) {
 			$resv_month = date('m', $resv_dt);
 			$resv_day = date('d', $resv_dt);
 			$resv_time = $reservation['reservation_time'];
+			// Make sure the reservation is for the requested date
 			if($curr_year == $resv_year and $curr_month == $resv_month and $curr_day == $resv_day) {
+				// Add the reservation to the list of reservations for this table onthis day
 				array_push($today_reservations, $reservation);
 			}
 		}
@@ -77,24 +87,28 @@ $qry = "SELECT rt.table_number as table_id, max_chairs, rsv.party_size, "
 	. "WHERE rt.restaurant_id=(select restaurant_id FROM restaurant LIMIT 1)";
 
 $qry_result = mysqli_query($conn, $qry)->fetch_all(MYSQLI_ASSOC);
+// Seperate the reservations by the table they are assigned to
 $resv_by_table = getByTable($qry_result);
 
+// Get only those reservations relevant for the specified date.
 $resv_by_table = reservationsByDay($resv_by_table, $curr_time);
 
 $curr_year = date('Y');
 $curr_month = date('m');
 $curr_day = date('d');
+// Display the table and all assigned reservations
 foreach($resv_by_table as $rest_table) {
 	$resv_count = count($rest_table->reservations);
 	$reservations = "";
+	// Add all the reservations to this table row for the current restaurant table
 	foreach($rest_table->reservations as $resv) {
 		$resv_id = $resv['reservation_id'];
 		$resv_count = $resv['party_size'];
 		$resv_time = $resv['reservation_time'];
 
+		// Create a string describing the reservatoin
 		$reservations = $reservations . "Id: $resv_id Party: $resv_count Time: $resv_time<br>";
 	}
-	// echo "Table $rest_table->table_id max chairs $rest_table->max_chairs Number reservations: <br>";
 ?>
 	<tr>
 		<td><?= $rest_table->table_id ?></td>

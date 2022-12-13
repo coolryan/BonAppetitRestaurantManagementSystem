@@ -12,21 +12,23 @@ Purpose: To create reservation page for customers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Reservation Page</title>
-	<style type="text/css"><?php include 'CSS/Main.css';?></style>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
     <div id="content">
         <?php
-            require_once("Connect.php");
-            // Header
-            require_once("Header.php");
-            require_once("utils.php");
+            // Display the header
+            require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+            // Import some needed PHP files
+            require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+            // Start the session so we know if a user is logged in and who it is
             checkAndStartSession();
             $logged_in = isLoggedIn();
         ?>
         <h1>Reservation</h1>
         <?php
-
+            // Check if a reservation is being created/edited
             if (isset($_POST['name'])) {
                 
                 $reservation_id = (empty($_POST['reservation_id'])) ? null : $_POST['reservation_id'];
@@ -38,14 +40,18 @@ Purpose: To create reservation page for customers
                 $time = $_POST['reservation_time'];
                 $table_id = (!isset($_POST['table'])) ? null : $_POST['table'];
 
+                // Creating a new reservation
                 if($reservation_id == null) {
+                    // The table may be defined if being created by a logged in user where they are putting a guest party to a specific table
                     if($table_id !=null)
                         // If we want to support more than one restaurants, this query will need to make sure the restaurant_table_id is from the right restaurant
                         $qry = "INSERT INTO reservation_table (party_size, patron_name, patron_email, patron_phone, reservation_date, reservation_time, restaurant_table_id) VALUES ({$party_size}, '{$name}', '{$email}', '{$phone}', '{$date}', '{$time}', (SELECT restaurant_table_id FROM restaurant_table where table_number='{$table_id}'))";
                     else
                         $qry = "INSERT INTO reservation_table (party_size, patron_name, patron_email, patron_phone, reservation_date, reservation_time) VALUES ({$party_size}, '{$name}', '{$email}', '{$phone}', '{$date}', '{$time}')";
                 }
+                // Editing an existing reservation
                 else {
+                    // The table may be defined if being created by a logged in user where they are putting a guest party to a specific table
                     if($table_id !=null)
                         // If we want to support more than one restaurants, this query will need to make sure the restaurant_table_id is from the right restaurant
                         $qry = "UPDATE reservation_table SET party_size={$party_size}, patron_name='{$name}', patron_email='{$email}', patron_phone='{$phone}', reservation_date= '{$date}', reservation_time= '{$time}', restaurant_table_id= (SELECT restaurant_table_id FROM restaurant_table where table_number='{$table_id}') WHERE reservation_id={$reservation_id}";
@@ -56,14 +62,16 @@ Purpose: To create reservation page for customers
                 if($qry_result) {
                     $success = True;
                 }
-
+                // Show any errors that happened
                 if(isset($error_msg)) {
                     echo "<p class='error'>".$error_msg."</p>";
-                } else if(isset($success) && $success) {
+                }
+                // Show success to the user
+                else if(isset($success) && $success) {
                     echo "<p class='success'>Reservation saved!</p>";
                 }
             }
-
+            // Get the details for a specific reservation
             else if(!empty($_GET['reservation_id'])) {
                 $reservation_id = $_GET['reservation_id'];
                 $qry_result = mysqli_query($conn, "SELECT * FROM reservation_table where reservation_id= {$reservation_id}");
@@ -76,6 +84,7 @@ Purpose: To create reservation page for customers
                 $time = $restaurant_table["reservation_time"];
                 $table_id = $restaurant_table["table_number"];
             } 
+            // A new reservation, so set all variables to blank
             else {
                 $reservation_id = "";
                 $party_size = 0;
@@ -109,7 +118,7 @@ Purpose: To create reservation page for customers
             <label for="phone">Enter your phone number:</label>
             <input type="tel" id="phone" name="phone" value="<?=$phone?>" placeholder="Provide an phone" required>
 
-        <!-- Checking if the login is successfully then it assigns a table-->
+        <!-- If the user is logged in, show the Table input to allow setting the table-->
         <?php
             if($logged_in) {
         ?>
@@ -122,11 +131,12 @@ Purpose: To create reservation page for customers
         </form>
 
         <?php 
+            // If the user is logge din, show the restaurant tables so they know where to assign a guest party
             if($logged_in) {
-                require_once("view_tables.php");
+                require_once($_SERVER['DOCUMENT_ROOT']."/view_tables.php");
             }
             // Footer
-            require_once("Footer.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
         ?>
     </div>
 </body>

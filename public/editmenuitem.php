@@ -12,16 +12,21 @@ Purpose: To allow the owners/mamngers to edit the menu item from customers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Edit Menu Item Page</title>
-	<style type="text/css"><?php include 'CSS/Main.css';?></style>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
 	<div id="content">
 		<?php
-			require_once("Header.php");
-			require_once("Connect.php");
-			require_once("utils.php");
+			// Display the header
+			require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+			// Import some needed PHP files
+			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+
+			// Start the session so we know if a user is logged in and who it is
 			checkAndStartSession();
 
+			// Check if the user is creating/editing a menu item
 			if (isset($_POST['name'])) {
 				$item_id = (empty($_POST['item_id'])) ? null : $_POST['item_id'];
 				$name = $_POST['name'];
@@ -30,6 +35,7 @@ Purpose: To allow the owners/mamngers to edit the menu item from customers
 				$active = (isset($_POST["active"])) ? 1 : 0;
 				$description = $_POST["description"];
 				
+				// Handle uploading files for menu item
 				if(isset($_FILES["photo"])) {
 					$errors= array();
 					$file_name = $_FILES['photo']['name'];
@@ -46,10 +52,11 @@ Purpose: To allow the owners/mamngers to edit the menu item from customers
 		        		$errors[]='File size must be excately 2 MB';
 		    		}
 					if(empty($errors)==true){
+						// Set the target directory for the menu item image.
 						$target_dir = $_SERVER['DOCUMENT_ROOT'] . "/images/menu/";
 						$target_file = $target_dir . basename($file_name);
 						$relative_path = "/images/menu/" . basename($file_name);
-						// echo "Target path and file: " . $target_file;
+						// Move the photo to the proper location
 						move_uploaded_file($file_tmp,$target_file);
 					}else{
 						echo "Errors: " . $errors;
@@ -59,19 +66,20 @@ Purpose: To allow the owners/mamngers to edit the menu item from customers
 					echo "No photo: ".$_FILES["photo"];
 				}
 				
+				// Make sure the required details are filled out when creating/editing
 				if($name != "" && $category != "" && $price != "") {
 					echo "Item: $item_id";
 					if(!isset($relative_path)) {
 						$relative_path = null;
 					}
-					// 
+					// Adding a new menu item
 					if($item_id == null) {
 						$qry = "INSERT INTO menu_item (name, description, price, active, image_path, category) VALUES ('{$name}', '{$description}', {$price}, {$active}, '{$relative_path}', '{$category}')";
 					}
+					// Updating a menu item
 					else {
 						$qry = "UPDATE menu_item SET name='{$name}', description='{$description}', price={$price}, active={$active}, image_path='{$relative_path}', category='{$category}' WHERE id={$item_id}";
 					}
-					// echo "Query: " . $qry;
 					$qry_result = mysqli_query($conn, $qry);
 					if($qry_result) {
 						$success = True;
@@ -80,11 +88,15 @@ Purpose: To allow the owners/mamngers to edit the menu item from customers
 					$error_msg = "Must enter all values";
 				}
 
+				// Show any errors to the user
 				if(isset($error_msg)) {
 					echo "<p color='red'>".$error_msg."</p>";
-				} else if(isset($success) && $success) {
+				}
+				// Show success to the user.
+				else if(isset($success) && $success) {
 					echo "<p color='green'>Menu item saved!</p>";
 				}
+			// The user is retrieving details for a specific menu item/
 			} else if(!empty($_GET['item_id'])) {
 				$item_id = $_GET['item_id'];
 				$qry_result = mysqli_query($conn, "SELECT * FROM menu_item where id= {$item_id}");
@@ -94,7 +106,9 @@ Purpose: To allow the owners/mamngers to edit the menu item from customers
 				$category = $menu_item["category"];
 				$price = $menu_item["price"];
 				$active = ($menu_item["active"] >0) ? True : False;
-			} else {
+			}
+			// New menu item to be created, so start all variables to empty.
+			else {
 				$item_id = "";
 				$name = "";
 				$description = "";
@@ -113,6 +127,7 @@ Purpose: To allow the owners/mamngers to edit the menu item from customers
 			<label for="category">Category</label>
 			<select name="category" id="category">
 		<?php
+			// Add the menu categories, and preselect a category if relevant
 			$qry_result = mysqli_query($conn, "SELECT name FROM menu_category")->fetch_all(MYSQLI_ASSOC);
 			foreach($qry_result as $category_vals):
 				$selected = ($category == $category_vals["name"]) ? "selected" : "";
@@ -121,6 +136,7 @@ Purpose: To allow the owners/mamngers to edit the menu item from customers
 			<?php endforeach; ?>
 			</select>
 			<label for="price">Price</label>
+			<!-- Prices can only be incremented by cents. -->
 			<input type="number" min="0.00" step="0.01" name="price" value="<?= $price; ?>" autocomplete="off" required>
 			<label for="active">Active</label>
 			<input type="checkbox" name="active" <?= $active ? "checked" : "" ?> />
@@ -129,7 +145,7 @@ Purpose: To allow the owners/mamngers to edit the menu item from customers
 			<input type="submit" name="save" value="Save">
 			<input type="button" name="cancel" value="Cancel" onClick="window.location.href='/editmenu.php';">
 		</form>
-		<?php include_once('Footer.php'); ?>
+		<?php include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php"); ?>
 	</div>
 </body>
 </html>	

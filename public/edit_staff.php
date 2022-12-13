@@ -12,23 +12,28 @@ Purpose: To edit the staff members and their status by owneers/maangers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Edit Staff Page</title>
-	<style type="text/css"><?php include 'CSS/Main.css';?></style>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
 	<div id="content">
 		<?php
-			require_once("Header.php");
-			require_once("Connect.php");
-			require_once("utils.php");
+			// Display the header
+			require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+			// Import some needed PHP files
+			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+			
+			// Start the session so we know if a user is logged in and who it is
 			checkAndStartSession();
 			$allowed = isOwner() || isManager();
 			
+			// This page is only allowed for owners and managers
 			if(!$allowed) {
 				echo "You shouldn't be here!";
-				include_once('Footer.php');
+				include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
 				exit();
 			}
-
+			// Lets get user types so we can make sure that only owners can create owners
 			$user_type_results = mysqli_query($conn, "SELECT id, name FROM user_type")->fetch_all(MYSQLI_ASSOC);
 			$user_type_arr = array();
 			foreach($user_type_results as $user_type) {
@@ -36,12 +41,14 @@ Purpose: To edit the staff members and their status by owneers/maangers
 					$owner_type_id = $user_type["id"];
 				}
 			}
+			// Sanity check that an owner type exists in the DB
 			if(!isset($owner_type_id)) {
 				echo "Error, no owner type found.";
-				include_once('Footer.php');
+				include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
 				exit();
 			}
 
+			//Check if we are creating/editing a user
 			if (isset($_POST['first_name'])) {
 				$user_id = (empty($_POST['user_id'])) ? null : $_POST['user_id'];
 				$email = $_POST['email'];
@@ -51,28 +58,35 @@ Purpose: To edit the staff members and their status by owneers/maangers
 				$user_type = $_POST['user_type'];
 				$status = (isset($_POST["status"])) ? 1 : 0;
 				$date_created = $_POST['date_created'];
+				// Generate a random password for the user. For now, passwords need to be updated via MySQL by the owner.
 				$password = md5(generateRandomString());
 
+				// If trying to add an owner, make sure the user doing so is an owner themselves.
 				if($owner_type_id==$user_type && !isOwner()) {
 					echo "Only owners can add owners";
-					include_once('Footer.php');
+					include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
 					exit();
 				}
 
+				// Adding a new user
 				if($user_id == null) {
 					$qry = "INSERT INTO user (first_name, last_name, user_type, status, email, phone, date_created, password) VALUES ('{$first_name}', '{$last_name}', {$user_type}, {$status}, '{$email}', '{$phone}', '{$date_created}', '{$password}')";
 				}
+				// Updating a user
 				else {
-					$qry = "UPDATE menu_item SET first_name='{$first_name}', last_name='{$last_name}', user_type={$user_type}, status={$status}, email='{$email}', phone='{$phone}', date_created='{$date_created}' WHERE id={$user_id}";
-				}		
+					$qry = "UPDATE user SET first_name='{$first_name}', last_name='{$last_name}', user_type={$user_type}, status={$status}, email='{$email}', phone='{$phone}', date_created='{$date_created}' WHERE id={$user_id}";
+				}
 				$qry_result = mysqli_query($conn, $qry);
+				// If successful, requery to get the created date
 				if($qry_result) {
 					$success = True;
 					$qry_result = mysqli_query($conn, "SELECT id, date_created FROM user where email= {$email}");
 					$user_data = mysqli_fetch_assoc($qry_result);
+					// Convert the date from MySQL to something we can display in the calendar in the UI
 					$date_created = date("Y-m-d", strtotime($user_data["date_created"]));
 					$user_id = $user_data['id'];
 				}
+			// Retrieving details of a specific user
 			} else if(!empty($_GET['user_id'])) {
 				$user_id = $_GET['user_id'];
 				$qry = "SELECT u.*, user_type.name as user_type FROM user u left join user_type ON u.user_type=user_type.id WHERE u.id= {$user_id}";
@@ -84,8 +98,10 @@ Purpose: To edit the staff members and their status by owneers/maangers
 				$last_name = $user_data["last_name"];
 				$user_type = $user_data["user_type"];
 				$status = ($user_data["status"] >0) ? True: False;
+				// Convert the date from MySQL to something we can display in the calendar in the UI
 				$date_created = date("Y-m-d", strtotime($user_data["date_created"]));
 			} else {
+				// New user, lets define all variables to empty to allow user to create.
 				$user_id = "";
 				$email = "";
 				$phone = "";
@@ -110,6 +126,7 @@ Purpose: To edit the staff members and their status by owneers/maangers
 			<label for="user_type">User Type</label>
 			<select name="user_type" id="user_type">
 		<?php
+			// Add the user types and pre-select the current user type if it exists.
 			foreach($user_type_results as $user_type):
 				$selected = ($user_type == $user_type["id"]) ? "selected" : "";
 		?>
@@ -126,7 +143,7 @@ Purpose: To edit the staff members and their status by owneers/maangers
 
 		</div>
 	</form>
-		<?php include_once('Footer.php'); ?>
+		<?php include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php"); ?>
 	</div>
 </body>
 </html>

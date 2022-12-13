@@ -1,18 +1,27 @@
+<!--
+Filename: schedule_table.php
+Author: Ryan Setaruddin
+BCS 350- Web Database Developement
+Professor Kaplan
+Date: December 1, 2022
+Purpose: Show all staff schedule in a paginated table.
+-->
 <?php  
-	// Header
+	// Import some needed PHP files
 	require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+    // Start the session so we know if a user is logged in and who it is
 	checkAndStartSession();
 	$logged_in = isLoggedIn();
 
     // Exit page if not owner or manager
     if(!$logged_in) {
         echo "You shouldn't be here!";
-        include_once('Footer.php');
+        include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
         exit();
     }
 
+    // Staff members can only view their own schedule, owners/managers can view all
     $view_all = isOwner() || isManager();
-
 
 	// Connect to MySQL
 	require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
@@ -32,14 +41,15 @@
     }
     $initial_page = ($page_number-1) * $page_limit; 
 
+    // Get all the schedule
     if($view_all)
     	$qry = "SELECT * FROM staff_schedule ORDER BY start_datetime DESC";
+    // Get the schedule only for the logged in user
    	else {
    		$user_id = $_SESSION['user_id'];
    		$qry = "SELECT * FROM staff_schedule WHERE user_id=$user_id ORDER BY start_datetime DESC";
    	}
 
-    
     $qry_result = mysqli_query($conn, $qry);
 
     // Some pagination calculations based on results
@@ -57,13 +67,14 @@
 
     $schedule_data = $qry_result->fetch_all(MYSQLI_ASSOC);
 
+    // Show the editing actions only if show_edit is true
     if($show_edit) {
-        ?>
+?>
         <a href="/staff/schedule.php" class="button">Add To Schedule</a>
-        <?php
+        <br>
+<?php
     }
 ?>
-    
     <table>
         <tr>
             <th>Date</th>
@@ -89,25 +100,26 @@
 		$full_name = "{$sched_item['first_name']} {$sched_item['last_name']}";
 ?>
 
-    <tr>
-        <td><?= $start_date ?></td>
-        <td><?= $start_time ?></td>
-        <td><?= $end_date ?></td>
-        <td><?= $end_time ?></td>
-        <td><?= $sched_item['user_id'] ?></td>
-        <td><?= $full_name ?></td>
-        <td><?= $sched_item['email'] ?></td>
-        <td><?= $sched_item['phone'] ?></td>
-    <?php
+        <tr>
+            <td><?= $start_date ?></td>
+            <td><?= $start_time ?></td>
+            <td><?= $end_date ?></td>
+            <td><?= $end_time ?></td>
+            <td><?= $sched_item['user_id'] ?></td>
+            <td><?= $full_name ?></td>
+            <td><?= $sched_item['email'] ?></td>
+            <td><?= $sched_item['phone'] ?></td>
+<?php
     if($show_edit)
         echo "<td><a href='$edit_link'>Edit</a></td>";
-    ?>
+?>
         
-    </tr>
+        </tr>
 <?php
     } 
 ?>
-</table>
+    </table>
+    <br>
 <?php
     // show page number with link   
     for($page_number = 1; $page_number<= $total_pages; $page_number++) {  

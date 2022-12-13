@@ -4,7 +4,7 @@ Author: Ryan Setaruddin
 BCS 350- Web Database Developement
 Professor Kaplan
 Date: Oct. 11, 2022
-Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without having to going back to the registration page
+Purpose: To allow the owner, admins, and staff of restaurant to login without having to going back to the registration page
 -->
 <!DOCTYPE html>
 <html>
@@ -12,20 +12,22 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login page</title>
-	<style type="text/css"><?php include 'CSS/Main.css';?></style>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
 	<div id="content">
 		<?php
 			// include our connect script
-			require_once("Header.php");
-			require_once("Connect.php");
-			require_once("utils.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+			// Start the session so we know if a user is logged in and who it is
 			checkAndStartSession();
+			// Display the header
+			require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
 			// check to see if there is a user already logged in, if so redirect them
 			
 			if (!empty($_SESSION['email'])) {
-				// redirect the user to the Home page
+				// redirect the user to the Welcome page
 				header("Location: Welcome.php");
 			}
 		?>
@@ -41,7 +43,6 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 				if ($email != "" && $passwd != "") {
 					// query the database to see if the email exists
 					$query = "SELECT u.*, ut.name as user_type_name FROM user u left join user_type ut on u.user_type=ut.id WHERE email='{$email}'";
-					echo $query;
 					$result = mysqli_query($conn, $query);
 					if (mysqli_num_rows($result) == 1) {
 						// get the record from the query
@@ -106,7 +107,7 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 			</table>
 		</form>
 		<!-- Footer -->
-		<?php require_once("Footer.php"); ?>
+		<?php require_once($_SERVER['DOCUMENT_ROOT']."/Footer.php"); ?>
 	</div>
 </body>
 </html>

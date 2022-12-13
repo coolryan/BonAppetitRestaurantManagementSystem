@@ -4,7 +4,7 @@ Author: Ryan Setaruddin
 BCS 350- Web Database Developement
 Professor Kaplan
 Date: November 26, 2022
-Purpose: To view the listed reservations by owners/managers
+Purpose: For owners/managers to view the listed reservations and possibly make edits
 -->
 <!DOCTYPE html>
 <html>
@@ -12,20 +12,24 @@ Purpose: To view the listed reservations by owners/managers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>View Reservation Page</title>
-	<style type="text/css"><?php include 'CSS/Main.css';?></style>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
     <div id="content">
 	<?php
-        // AT TOP
-        require_once("Header.php");
-        require_once("utils.php");
+        // Display the header
+        require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+        // Import some needed PHP files
+        require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+        // Start the session so we know if a user is logged in and who it is
         checkAndStartSession();
 
         // To make sure editing is allowed in reservation_Table page:
         $allow_editing = True;
+        // Bring in the reservation table page
         require_once("reservation_table.php");
-        require_once("Footer.php");
+        // Display the footer
+        require_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
     ?>
     </div>
 </body>

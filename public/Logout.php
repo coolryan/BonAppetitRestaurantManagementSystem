@@ -4,7 +4,7 @@ Author: Ryan Setaruddin
 BCS 350- Web Database Developement
 Professor Kaplan
 Date: Oct. 11, 2022
-Purpose: To allow the owner of Bon Appetit Paris to leave the site
+Purpose: To allow the owner of the restaurant to log out of the site
 -->
 <!DOCTYPE html>
 <html>
@@ -12,18 +12,19 @@ Purpose: To allow the owner of Bon Appetit Paris to leave the site
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Logout Page</title>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
 <div id="content">
 	<?php  
-		// verify the user is logged in
-		require_once("utils.php");
+		require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+		// Start the session so we know if a user is logged in and who it is
 		checkAndStartSession();
 		if (isset($_SESSION['email'])) {
 			// IF YOU ARE HERE THEN THE USER IS LOGGED IN, AND WE CAN LOG THEM OUT
 			session_destroy();
 
-			//redirect to the home page
+			//redirect to the welcome page
 			header("Location: Welcome.php");
 		}
 		else

@@ -41,6 +41,7 @@ body {
 	width: 50px;
 	height: auto;
 }
+
 /*CSS for forms*/
 form {
 	position: relative;	
@@ -49,29 +50,37 @@ form {
 	border-radius: 20px;
 	display: inline-block;
 }
-
 form input, label {
 	display: block;
 	border-radius: 20px;
 }
-
 form input[type=text], textarea {
 	width: 400px;
 }
-
 form input, textarea, select {
 	background-color: lightseagreen;
 	margin-bottom: 15px;
 }
-
 form label {
 	margin-bottom: 5px;
 }
+
 /*CSS for content*/
 #content {
 	padding-bottom: 150px;
 	text-align: center;
 }
+#content table {
+	text-align: center;
+	display: inline-block;
+}
+td {
+	padding: 10px	
+}
+#successDiv {
+	color: green;
+}
+
 /*CSS for footer*/
 footer {
 	position: fixed;
@@ -83,18 +92,19 @@ footer {
 	background-color: lightgreen;
 	border-radius: 20px;
 }
-
 footer img {
 	width: 140px;
 	height: auto;
 	float: left;
 }
+
 /*CSS for button*/
 button {
 	background-color: lavender;
 	border-radius: 20px;
 	float: right;
 }
+
 /*CSS for messages*/
 .error {
 	color: red;
@@ -102,22 +112,20 @@ button {
 .success {
 	color: green;
 }
+
 /*CSS for reservation items*/
 .reservationItem label {
 	display: inline;
 }
 
 /*CSS for action buttons*/
-
 div.actionbtn {
 	text-decoration: none;
 	display: inline-block;
 }
-
 div.actionbtn button {
 	float: left;
 }
-
 div.actionbtn a {
 	text-decoration: none;
 }
@@ -149,8 +157,72 @@ div.actionbtn a {
 .menucategory .menuItem div {
 	text-transform: capitalize;
 }
-
 .menuItemImage {
 	max-width: 25%;
 	height: auto;
+}
+.menuItemName {
+	display: inline-block;
+}
+
+/* CSS for ordering  */
+.orderMenu .menucategory:nth-child(odd) .menuItem {
+	border: 1px solid lightgreen;
+}
+.orderMenu .menucategory:nth-child(even) .menuItem {
+	border: 1px solid whitesmoke;
+}
+.orderMenu .menuItem {
+	text-align: center;
+	border-radius: 8px;
+	padding: 5px;
+	width: 60%;
+	display: inline-block;
+	margin: 20px;
+	height: 30%;
+}
+.addOrderButton {
+	float: none;
+	display: inline-block;
+}
+.orderInfo label {
+	display: inline-block;
+	margin-right: 10px;
+}
+.orderInfo input {
+	display: inline-block;
+	width: 50px;
+}
+.orderInfo label, input, div {
+	margin-bottom: 2px;
+}
+#orderTotalInfo {
+	display: inline-block;
+	text-align: center;
+	width: 25%;
+	background-color: white;
+	border-radius: 8px;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid palegreen;
+}
+#orderTotalInfo .orderInfo {
+	text-align: center;
+}
+#submitOrder {
+	display: inline-block;
+	text-align: center;
+	border-radius: 8px;
+	padding: 3px;
+	width: 50%;
+	background-color: yellow;
+	color: black;
+}
+#submitOrder:hover {
+	background-color: yellowgreen;
+	cursor: pointer;
+}
+
+#ordersTable {
+	margin-bottom: 50px;
 }
