@@ -19,6 +19,7 @@ Purpose: To create navigation bar for restaurant mangement system
 
 		// Image from https://iconscout.com/icon/shopping-1424 License https://creativecommons.org/licenses/by-sa/3.0/
 		echo '<a href="/order.php"><img src="/images/icons/take_order.png" alt="order"/>Order</a>';
+		echo '<a href="/view_orders.php"><img src="/images/icons/take_order.png" alt="order"/>Existing Orders</a>';
 
 		if(isOwner() or isManager()) {
 			echo '<a href="/staff.php"><img src="/images/icons/restaurant_staff.png" alt="R_staff"/>Staff</a>';
