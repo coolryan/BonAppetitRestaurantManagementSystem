@@ -1,6 +1,6 @@
 <?php  
 	// Header
-	require_once("utils.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
 	checkAndStartSession();
 
     $allowed = isOwner() || isManager();
@@ -8,12 +8,12 @@
     // Exit page if not owner or manager
     if(!$allowed) {
         echo "You shouldn't be here!";
-        include_once('Footer.php');
+        include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
         exit();
     }
 
 	// Connect to MySQL
-	require_once("Connect.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
 
     // This component is sometimes displayed where editing is not ideal, so lets accomodate
     $show_edit = False;

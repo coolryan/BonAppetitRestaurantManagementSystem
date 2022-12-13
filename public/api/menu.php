@@ -5,9 +5,9 @@
 // Professor Kaplan
 // Date: December 7, 2022
 // Purpose: Entry point for menu API
-require_once("utils.php");
-checkAndStartSession();
 use api\Controller\MenuController;
+require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+checkAndStartSession();
 require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
 require($_SERVER['DOCUMENT_ROOT']."/api/controller/MenuController.php");
 

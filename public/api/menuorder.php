@@ -5,7 +5,7 @@
 // Professor Kaplan
 // Date: December 9, 2022
 // Purpose: Entry point for menu order API
-require_once("utils.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
 checkAndStartSession();
 
 use api\Controller\MenuOrderController;

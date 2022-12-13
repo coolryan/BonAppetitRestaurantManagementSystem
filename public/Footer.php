@@ -11,7 +11,7 @@ Purpose: For side note to knowing who created this app
 	<hr>
 	<address>
 		<?php
-			require_once("Connect.php"); 
+			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php"); 
 			$qry_result = mysqli_query($conn, "SELECT * FROM restaurant")->fetch_assoc();
 			$address = $qry_result['address'];
 		?>

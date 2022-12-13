@@ -12,12 +12,13 @@ Purpose: To allow the owner of Bon Appetit Paris to leave the site
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Logout Page</title>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
 <div id="content">
 	<?php  
 		// verify the user is logged in
-		require_once("utils.php");
+		require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
 		checkAndStartSession();
 		if (isset($_SESSION['email'])) {
 			// IF YOU ARE HERE THEN THE USER IS LOGGED IN, AND WE CAN LOG THEM OUT

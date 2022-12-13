@@ -17,10 +17,10 @@ Purpose: To view user schedules. If staff, only view your own.
 <body>
     <div id="content">
         <?php
-            require_once("../Connect.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
             // Header
-            require_once("../Header.php");
-            require_once("../utils.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
             checkAndStartSession();
             $logged_in = isLoggedIn();
 
@@ -28,14 +28,14 @@ Purpose: To view user schedules. If staff, only view your own.
             
             if(!$logged_in) {
                 echo "You shouldn't be here!";
-                include_once('../Footer.php');
+                include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
                 exit();
             }
             if($allowed) {
                 $allow_editing = true;
             }
-            require_once("schedule_table.php");
-            include_once('../Footer.php');
+            require_once($_SERVER['DOCUMENT_ROOT']."/staff/schedule_table.php");
+            include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
         ?>
     </div>
 </body>

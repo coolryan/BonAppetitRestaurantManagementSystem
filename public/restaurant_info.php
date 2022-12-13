@@ -4,14 +4,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Restaurant Information</title>
-	<style type="text/css"><?php include 'CSS/Main.css';?></style>
+	<link rel="stylesheet" type="text/css" href="/CSS/Main.css">
 </head>
 <body>
 	<div id="content">
 		<?php 
 			// Header
-			require_once("Header.php");
-			require_once("utils.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
 			checkAndStartSession();
 			$logged_in = isLoggedIn();
 
@@ -22,7 +22,7 @@
 			}
 
 			// Connect to MySQL
-			require_once("Connect.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
 			//$qry_result = mysqli_query($conn, "SELECT * FROM restaurant")->fetch_assoc();
 			//$restaurantName = $qry_result['name'];
 		?>

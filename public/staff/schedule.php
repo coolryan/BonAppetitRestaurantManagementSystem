@@ -28,7 +28,7 @@ Purpose: To create/view/edit staff schedules
             
             if(!$allowed) {
                 echo "You shouldn't be here!";
-                include_once('Footer.php');
+                include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
                 exit();
             }
 

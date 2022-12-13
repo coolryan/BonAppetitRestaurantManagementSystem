@@ -12,14 +12,14 @@ Purpose: To view the listed reservations by owners/managers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>View Reservation Page</title>
-	<style type="text/css"><?php include 'CSS/Main.css';?></style>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
     <div id="content">
 	<?php
         // AT TOP
-        require_once("Header.php");
-        require_once("utils.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
         checkAndStartSession();
 
         // To make sure editing is allowed in reservation_Table page:

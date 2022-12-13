@@ -12,16 +12,16 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login page</title>
-	<style type="text/css"><?php include 'CSS/Main.css';?></style>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
 	<div id="content">
 		<?php
 			// include our connect script
-			require_once("Header.php");
-			require_once("Connect.php");
-			require_once("utils.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
 			checkAndStartSession();
+			require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
 			// check to see if there is a user already logged in, if so redirect them
 			
 			if (!empty($_SESSION['email'])) {

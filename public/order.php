@@ -1,5 +1,5 @@
 <?php
-require_once("utils.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
 checkAndStartSession();
 ?>
 <!DOCTYPE html>
@@ -8,7 +8,7 @@ checkAndStartSession();
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Order</title>
-	<style type="text/css" src='/CSS/Main.css'></style>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 
 	<!-- Get React library and necessary libraries via CDN -->
 	<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
@@ -20,11 +20,11 @@ checkAndStartSession();
 <body>
 	<div id="content">
 	<?php
-		require_once("Header.php");
+		require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
 	?>
 	<div id="root"></div>
 
-	<?php include_once('Footer.php'); ?>
+	<?php include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php"); ?>
 	</div>
 </body>
 </html>

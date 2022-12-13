@@ -12,24 +12,24 @@ Purpose: To view the staffs by owners/managers
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Staff page</title>
-	<style type="text/css"><?php include 'CSS/Main.css';?></style>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
 	<div id="content">
 		<?php  
 			// Header
-			require_once("Header.php");
-			require_once("utils.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
 			checkAndStartSession();
 			$allowed = isOwner() || isManager();
 			
 			if(!$allowed) {
 				echo "You shouldn't be here!";
-				include_once('Footer.php');
+				include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
 				exit();
 			}
 			// Connect to MySQL
-			require_once("Connect.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
 
 		?>
 		<div class="actionbtn">

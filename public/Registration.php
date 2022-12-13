@@ -11,19 +11,19 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Bon Appetit Paris Restaurant Mangement system | registration form</title>
-	<style type="text/css"><?php include 'CSS/Main.css';?></style>
+	<title>Bon Appetit Paris Restaurant Mangement System | Registration Form</title>
+	<link rel="stylesheet" type="text/css" href="CSS/Main.css">
 </head>
 <body>
 	<div id="content">
 		<!-- Header -->
-		<?php require_once("Header.php");?>
+		<?php require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");?>
 		<h1>Register</h1>
 		<h2><b>Create Owner account</b></h2>
 		<?php
 			// include our connect script
-			require_once("Connect.php");
-			require_once("utils.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
+			require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
 			checkAndStartSession();
 
 			// check to see if there is a user already logged in, if so redirect them

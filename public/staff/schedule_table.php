@@ -15,7 +15,7 @@ Purpose: Show all staff schedule in a paginated table.
     // Exit page if not owner or manager
     if(!$logged_in) {
         echo "You shouldn't be here!";
-        include_once('Footer.php');
+        include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
         exit();
     }
 
