@@ -60,7 +60,6 @@ class MenuDAO {
     	}
     	$qry = "INSERT INTO meal_order_menu_item (meal_order_id, menu_item_id, instructions) " . 
     		"VALUES ($order_id, $menu_item, '$instructions')";
-    	echo $qry;
     	try {
     		$qry_result = mysqli_query($this->conn, $qry);
             if($qry_result)

@@ -5,10 +5,9 @@
 // Professor Kaplan
 // Date: December 9, 2022
 // Purpose: Handle menu API endpoints
+namespace api\Controller;
 require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
 checkAndStartSession();
-
-namespace api\Controller;
 use dao\MenuDAO;
 require($_SERVER['DOCUMENT_ROOT']."/DAO/menu.php");
 
@@ -71,6 +70,8 @@ class MenuOrderController {
 
                     // Now lets add menu items to order
                     $error = $this->addMenuItemsToOrder($order_id, $post_data);
+                    $results = array("orderId" => $order_id);
+                    $response['body'] = json_encode($results);
                 }
         		else
                     $error = "Must post some data";
@@ -84,6 +85,7 @@ class MenuOrderController {
             $response['status_code_header'] = 'HTTP/1.1 400 BAD REQUEST';
             header($response['status_code_header']);
             echo $error;
+            return;
         }
 		header($response['status_code_header']);
         if ($response['body']) {

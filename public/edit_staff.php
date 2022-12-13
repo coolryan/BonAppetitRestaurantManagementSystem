@@ -63,8 +63,8 @@ Purpose: To edit the staff members and their status by owneers/maangers
 					$qry = "INSERT INTO user (first_name, last_name, user_type, status, email, phone, date_created, password) VALUES ('{$first_name}', '{$last_name}', {$user_type}, {$status}, '{$email}', '{$phone}', '{$date_created}', '{$password}')";
 				}
 				else {
-					$qry = "UPDATE menu_item SET first_name='{$first_name}', last_name='{$last_name}', user_type={$user_type}, status={$status}, email='{$email}', phone='{$phone}', date_created='{$date_created}' WHERE id={$user_id}";
-				}		
+					$qry = "UPDATE user SET first_name='{$first_name}', last_name='{$last_name}', user_type={$user_type}, status={$status}, email='{$email}', phone='{$phone}', date_created='{$date_created}' WHERE id={$user_id}";
+				}
 				$qry_result = mysqli_query($conn, $qry);
 				if($qry_result) {
 					$success = True;

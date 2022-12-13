@@ -11,7 +11,8 @@ class MenuList extends React.Component {
             tip: 0.0,
             tableId: null,
             serverId: null,
-            user: null
+            user: null,
+            submitted: false
         }
         this.updateOrder = this.updateOrder.bind(this);
         this.updateInStore = this.updateInStore.bind(this);
@@ -64,7 +65,7 @@ class MenuList extends React.Component {
             const menuItemOrderList = instructionList.map(orderInstruction => {
                 return {"menu_item_id": menuItemId, "instructions":  orderInstruction};
             });
-            orderItems.push(menuItemOrderList);
+            orderItems = orderItems.concat(menuItemOrderList);
         }
         
         let data = {
@@ -85,6 +86,8 @@ class MenuList extends React.Component {
             response => response.json()
         ).then(jsonResult => {
             console.log("Got result from posting");
+            this.setState({"submitted": true});
+            this.setState({"orderId": jsonResult["orderId"]});
         });
     }
 
@@ -189,6 +192,16 @@ class MenuList extends React.Component {
 
         return (
             <div>
+                {this.state.submitted &&
+                    <p id="successDiv" className="orderInfo">
+                        Your order was successfully submitted
+                    </p>
+                }
+                {this.state.orderId && 
+                    <div className="orderInfo">
+                        Order: {this.state.orderId}
+                    </div>
+                }
                 <div id="orderTotalInfo">
                     <div id="orderTotal" className="orderInfo">Sub Total: ${orderTotal}</div>
                     <div id="taxTotal" className="orderInfo">Tax: ${tax}</div>

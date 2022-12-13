@@ -72,6 +72,9 @@ form label {
 	padding-bottom: 150px;
 	text-align: center;
 }
+#successDiv {
+	color: green;
+}
 /*CSS for footer*/
 footer {
 	position: fixed;
