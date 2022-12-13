@@ -10,7 +10,8 @@ class MenuList extends React.Component {
             inStore: true,
             tip: 0.0,
             tableId: null,
-            serverId: null
+            serverId: null,
+            user: null
         }
         this.updateOrder = this.updateOrder.bind(this);
         this.updateInStore = this.updateInStore.bind(this);
@@ -35,6 +36,20 @@ class MenuList extends React.Component {
             });
             this.setState({priceLookup: priceLookup});
             this.setState({ menuItems: data });
+        });
+
+        fetch("/api/info.php").then((response) => {
+            // Login was successful
+            if (response.ok) {
+                return response.json();
+            }
+        }).then(data => {
+            if(!["Anonymous","Unknown",""].includes(data["user"])) {
+                this.setState({"inStore": true, "serverId": data["userId"]});
+            } else {
+                this.setState({"inStore": false});
+            }
+            this.setState({user: data["user"]});
         });
     }
 
@@ -150,7 +165,7 @@ class MenuList extends React.Component {
                         />;
             });
             categories.push (
-                <div className="menucategory"><div className='categoryheading'><h4>{key}</h4></div>{menuItemHtml}</div>
+                <div className="menucategory"><div className="categoryheading"><h4>{key}</h4></div>{menuItemHtml}</div>
             );
         });
         const tax = this.getTax(orderTotal);
