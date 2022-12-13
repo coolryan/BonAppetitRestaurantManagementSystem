@@ -13,13 +13,19 @@ Purpose: To create navigation bar for restaurant mangement system
 			<a href="/Welcome.php"><img src="/images/icons/home.png" alt="Home"/>Home</a>
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+	// Start the session so we know if a user is logged in and who it is
 	checkAndStartSession();
+	// The navigation bar will change depending on whether the user is logged in or not, and if they are logged in, what user role they have
 	if(isLoggedIn()) {
-		echo '<a href="/staff/view_schedule.php">Schedule</a>';
+		// Image from https://www.istockphoto.com/illustrations/book-a-meeting-icon
+		// License: https://www.istockphoto.com/legal/license-agreement?utm_medium=organic&utm_source=google&utm_campaign=iptcurl
+		echo '<a href="/staff/view_schedule.php"><img src="/images/icons/staff_schedule.jpeg" alt="order"/>Schedule</a>';
 
 		// Image from https://iconscout.com/icon/shopping-1424 License https://creativecommons.org/licenses/by-sa/3.0/
 		echo '<a href="/order.php"><img src="/images/icons/take_order.png" alt="order"/>Order</a>';
-		echo '<a href="/view_orders.php"><img src="/images/icons/take_order.png" alt="order"/>Existing Orders</a>';
+		// Image from https://creativecommons.org/licenses/by/3.0/
+		// License https://iconscout.com/icon/checklist-384
+		echo '<a href="/view_orders.php"><img src="/images/icons/food_orders.webp" alt="order"/>Existing Orders</a>';
 
 		if(isOwner() or isManager()) {
 			echo '<a href="/staff.php"><img src="/images/icons/restaurant_staff.png" alt="R_staff"/>Staff</a>';

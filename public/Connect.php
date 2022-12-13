@@ -6,7 +6,7 @@
 // Date: Oct. 11, 2022
 // Purpose: To create database called "bonappetit" and to connect to MySQL
 
-	//varaiables
+	// MySQL Connection details
 	$dbhost = "localhost";
 	$dbuser = "bonappetit";
 	$dbpass = "bonappetit";

@@ -4,14 +4,15 @@ Author: Ryan Setaruddin
 BCS 350- Web Database Developement
 Professor Kaplan
 Date: Oct. 11, 2022
-Purpose: For side note to knowing who created this app
+Purpose: Footer showing basic information about the restaurant
 -->
 <footer>
-	<img src="images/icons/restaurant_logo.png" alt="restaurant_logo">
+	<img src="/images/icons/restaurant_logo.png" alt="restaurant_logo">
 	<hr>
 	<address>
 		<?php
 			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php"); 
+			// Get the address for displaying in the footer
 			$qry_result = mysqli_query($conn, "SELECT * FROM restaurant")->fetch_assoc();
 			$address = $qry_result['address'];
 		?>

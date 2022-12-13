@@ -4,9 +4,10 @@
 // BCS 350- Web Database Developement
 // Professor Kaplan
 // Date: December 9, 2022
-// Purpose: This class provides a wrapper the IMS MySQL DB.
+// Purpose: This class provides a wrapper the MySQL DB.
 namespace dao;
 
+// Provide easy to use interface for MySQL
 class MenuDAO {
 
     private $conn = null;
@@ -16,6 +17,7 @@ class MenuDAO {
         $this->conn = $conn;
     }
 
+    // Get all the menu items
     public function find_all()
     {
         $qry = "
@@ -33,6 +35,8 @@ class MenuDAO {
             echo 'Caught exception fetching all menu items: ',  $e->getMessage(), "\n";
         }
     }
+
+    // Get all the activfe menu items
     public function find_all_active()
     {
         $qry = "
@@ -52,6 +56,7 @@ class MenuDAO {
             echo 'Caught exception fetching all menu items: ',  $e->getMessage(), "\n";
         }
     }
+
     // Adds a menu item to an order. Creates the order it doesn't exist yet.
     public function add_item_to_meal_order($order_id, $restaurant_table_id, $in_store, $server_id, $menu_item, $instructions)
     {
@@ -70,10 +75,13 @@ class MenuDAO {
             echo 'Caught exception creating meal order: ',  $e->getMessage(), "\n";
         }
     }
+
+    // Create an order
     public function create_meal_order($restaurant_table_id, $in_store, $server_id, $tip) {
     	if($in_store!=0)
     		$in_store = 1;
 
+        // If no table or server defined, set to NULL for the query
     	if(!isset($restaurant_table_id) || empty($restaurant_table_id))
     		$restaurant_table_id = "NULL";
     	if(!isset($server_id) || empty($server_id))

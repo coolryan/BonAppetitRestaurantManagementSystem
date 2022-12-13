@@ -5,12 +5,18 @@
 // Professor Kaplan
 // Date: December 9, 2022
 // Purpose: Handle menu API endpoints
+
 namespace api\Controller;
+// Import some needed PHP files
 require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+// Start the session so we know if a user is logged in and who it is
 checkAndStartSession();
+
+// This allows us to use the MenuDAO for interacting with MySQL
 use dao\MenuDAO;
 require($_SERVER['DOCUMENT_ROOT']."/DAO/menu.php");
 
+// This class handles requests to the menu order api
 class MenuOrderController {
 	public function __construct($conn, $requestMethod)
     {
@@ -34,18 +40,23 @@ class MenuOrderController {
     // }
     public function processRequest($post_data)
     {
+        // Handle different request methods
     	switch ($this->requestMethod) {
     		case 'POST':;
     			$response['status_code_header'] = 'HTTP/1.1 200 OK';
+                // Make sure data was submitted in the post
                 if(!empty($post_data)) {
                     if(empty($post_data["order_id"])) {
                         // New order
-                        if(empty($post_data["in_store"])) {
+                        // If a new order, make sure in_store is defined
+                        if(!array_key_exists("in_store", $post_data)) {
                             $error = "Must define whether in store or not.";
                             break;
                         } else 
+                        // Translate the instore values
                             $in_store = $this->getInStore($post_data["in_store"]);
 
+                        // If in store, make sure required fields are defined
                         if($in_store == 1) {
                             if(empty($post_data["restaurant_table_id"])) {
                                 $error = "If in store, must define restaurant table.";
@@ -58,11 +69,13 @@ class MenuOrderController {
                             $restaurant_table_id = $post_data["restaurant_table_id"];
                             $server_id = $post_data["server_id"];
                         }
+                        // Check for tip, and set to 0 if non-existant
                         if(!isset($post_data["tip"]) || empty($post_data["tip"]))
                             $tip = 0;
                         else
                             $tip = $post_data["tip"];
 
+                        // Create the new order
                         $order_id = $this->menuDAO->create_meal_order($restaurant_table_id, $in_store, $server_id, $tip);
 
                     } else
@@ -81,23 +94,27 @@ class MenuOrderController {
     			$response = $this->notFoundResponse();
     			break;
 	    }
+        // Return any errors encountered
         if(isset($error)) {
             $response['status_code_header'] = 'HTTP/1.1 400 BAD REQUEST';
             header($response['status_code_header']);
             echo $error;
             return;
         }
+        // Success, so return the result
 		header($response['status_code_header']);
         if ($response['body']) {
             echo $response['body'];
         }
     }
+    // Convert different in store values to an int
     private function getInStore($value) {
         if($value == 0 || $value == "0" || $value == False || strtolower($value) == "false")
             return 0;
         else
             return 1;
     }
+    // Add menu items to a specific order
     private function addMenuItemsToOrder($order_id, $post_data) {
         if(!isset($post_data["items"]) || empty($post_data["items"]))
             return "There are no items to add to the order";
@@ -115,9 +132,7 @@ class MenuOrderController {
             $this->menuDAO->add_item_to_meal_order($order_id, "", "", "", $menu_item_id, $instructions);
         }
     }
-    private function createOrder($post_data) {
-
-    }
+    // Return a not found error
     private function notFoundResponse()
     {
         $response['status_code_header'] = 'HTTP/1.1 404 Not Found';

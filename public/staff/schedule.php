@@ -17,21 +17,25 @@ Purpose: To create/view/edit staff schedules
 <body>
     <div id="content">
         <?php
+            // Connect to MySQL
             require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
-            // Header
+            // Display the header
             require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+            // Import some needed PHP files
             require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
             checkAndStartSession();
             $logged_in = isLoggedIn();
 
             $allowed = isOwner() || isManager();
             
+            // Only admin/managers allowed
             if(!$allowed) {
                 echo "You shouldn't be here!";
                 include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
                 exit();
             }
 
+            // Creating/editing a user schedule
             if (isset($_POST['user_id'])) {
                 $mysql_dt_format = "Y-m-d H:i:s";
                 $schedule_id = (empty($_POST['schedule_id'])) ? null : $_POST['schedule_id'];
@@ -49,9 +53,11 @@ Purpose: To create/view/edit staff schedules
                 $start_datetime = date($mysql_dt_format, $start_unix_time);
                 $end_datetime = date($mysql_dt_format, $end_unix_time);
 
+                // Creating a new schedule for a user
                 if($schedule_id == null) {
                     $qry = "INSERT INTO staff_schedule (user_id, start_datetime, end_datetime) VALUES ({$user_id}, '{$start_datetime}', '{$end_datetime}')";
                 }
+                // Editing an existing schedule
                 else {
                     $qry = "UPDATE staff_schedule SET start_datetime='{$start_datetime}', end_datetime='{$end_datetime}' WHERE id={$schedule_id}";
                 }
@@ -61,12 +67,15 @@ Purpose: To create/view/edit staff schedules
                     $success = True;
                 }
 
+                // Show any errors
                 if(isset($error_msg)) {
                     echo "<p class='error'>".$error_msg."</p>";
-                } else if(isset($success) && $success) {
+                }
+                // Show success
+                else if(isset($success) && $success) {
                     echo "<p class='success'>Reservation saved!</p>";
                 }
-
+            // Get the details for a specific schedule
             } else if(!empty($_GET['schedule_id'])) {
                 $schedule_id = $_GET['schedule_id'];
                 $qry = "SELECT * FROM staff_schedule WHERE id= {$schedule_id}";
@@ -77,10 +86,9 @@ Purpose: To create/view/edit staff schedules
                 $start_time = date("H:i", strtotime($sched_data["start_datetime"]));
                 $end_date = date("Y-m-d", strtotime($sched_data["end_datetime"]));
                 $end_time = date("H:i", strtotime($sched_data["end_datetime"]));
-                // $end_datetime = $sched_data["end_datetime"];
-
-                // $date_created = date("Y-m-d", strtotime($user_data["date_created"]));
-            } else {
+            }
+            // New schedule, so set all variables to blank
+            else {
                 $schedule_id = "";
                 $user_id = "";
                 $user_name = "";
@@ -110,7 +118,6 @@ Purpose: To create/view/edit staff schedules
 
             <label for="end_time">End Time:</label>
             <input type="time" name="end_time" value="<?=$end_time?>">
-
 
             <input type="submit" name="Submit">
         </form>

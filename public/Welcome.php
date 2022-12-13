@@ -4,7 +4,7 @@ Author: Ryan Setaruddin
 BCS 350- Web Database Developement
 Professor Kaplan
 Date: Oct. 11, 2022
-Purpose: To create a welcome page for customers
+Purpose: A welcome page for customers, or dashboard for admin/managers
 -->
 <!DOCTYPE html>
 <html>
@@ -17,15 +17,19 @@ Purpose: To create a welcome page for customers
 <body>
 	<div id="content">
 		<?php
-			// AT TOP
+			// Display the header
 			require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+			// Import some needed PHP files
 			require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+			// Start the session so we know if a user is logged in and who it is
 			checkAndStartSession();
 			$logged_in = isLoggedIn();
 
-			//include our connect
+			// Connect to MySQL
 			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
+			// Get all the restaurants
 			$qry_result = mysqli_query($conn, "SELECT * FROM restaurant")->fetch_assoc();
+			// Get the name and restaurant id for the first restaurant. Currently we only support one.
 			$restaurantName = $qry_result['name'];
 			$restaurantID = $qry_result['restaurant_id'];
 			if($logged_in) {
@@ -38,7 +42,7 @@ Purpose: To create a welcome page for customers
 		<b><h2>Here's Our Story</h2></b>
 		<p><?= $qry_result['back_story']?></p>
 		<?php
-			// Only if manager or admin
+			// Display the reservations and staff schedule if the user is an owner or manager
 			$isPrivileged = isOwner() || isManager();
 			if($isPrivileged) {
 		?>
@@ -48,16 +52,26 @@ Purpose: To create a welcome page for customers
 				<a href="view_reservations.php" class="button">Edit Reservations</a>
 			</button>
 		</div>
+		<br>
 		<?php
+			// Pull in the reservation table
 			include_once($_SERVER['DOCUMENT_ROOT']."/reservation_table.php");
 
-			?><h3>Staff Schedule</h3><a href="staff/view_schedule.php">Edit Schedules</a><?php
+		?>
+		<h3>Staff Schedule</h3>
+		<div class="actionbtn">
+			<button>
+				<a href="staff/view_schedule.php">Edit Schedules</a>
+			</button>
+		</div>
+		<br>
+		<?php
+			// Pull in the staff schedule
 			include_once($_SERVER['DOCUMENT_ROOT']."/staff/schedule_table.php");
 		}
-
+		// Display the food=ter
 		include_once($_SERVER['DOCUMENT_ROOT']."/Footer.php");
-	?>
-</div>
-
+		?>
+	</div>
 </body>
 </html>

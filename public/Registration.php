@@ -16,18 +16,21 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 </head>
 <body>
 	<div id="content">
-		<!-- Header -->
-		<?php require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");?>
+		<?php 
+			// Display the header
+			require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
+		?>
 		<h1>Register</h1>
 		<h2><b>Create Owner account</b></h2>
 		<?php
-			// include our connect script
+			// include our connect script and other required files
 			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
 			require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+
+			// Start the session so we know if a user is logged in and who it is
 			checkAndStartSession();
 
 			// check to see if there is a user already logged in, if so redirect them
-			
 			if (isset($_SESSION['email'])) {
 				// redirect the user to the home page
 				header("Location: Welcome.php");
@@ -56,7 +59,6 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 					// make sure the password meets the min strength requirements
 					if (strlen($passwd) >= 8 && strpbrk($passwd, "!#$.,:;()") != false) {
 						// query the database to see the email is taken
-						// $query = mysqli_query($conn, "SELECT * FROM user WHERE email='{email}'");
 						$query = $conn->prepare("SELECT * FROM user WHERE email=?");
 						$query->bind_param('s', $email);
 						$query->execute();
@@ -77,8 +79,6 @@ Purpose: To create registration page for owner of the restaurant "Bon Appetit Pa
 							$query = mysqli_query($conn, "SELECT * FROM user WHERE email='{$email}'");
 							if (mysqli_num_rows($query) == 1) {
 								// IF WE ARE HERE THEN THE ACCOUNT WAS CREATED YAY!
-								// WE WILL SEND EMAIL ACTIVATION CODE HERE LATER
-
 								$success = true;
 							}
 							else

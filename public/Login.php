@@ -4,7 +4,7 @@ Author: Ryan Setaruddin
 BCS 350- Web Database Developement
 Professor Kaplan
 Date: Oct. 11, 2022
-Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without having to going back to the registration page
+Purpose: To allow the owner, admins, and staff of restaurant to login without having to going back to the registration page
 -->
 <!DOCTYPE html>
 <html>
@@ -19,13 +19,15 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 		<?php
 			// include our connect script
 			require_once($_SERVER['DOCUMENT_ROOT']."/utils.php");
+			// Start the session so we know if a user is logged in and who it is
 			checkAndStartSession();
+			// Display the header
 			require_once($_SERVER['DOCUMENT_ROOT']."/Header.php");
 			require_once($_SERVER['DOCUMENT_ROOT']."/Connect.php");
 			// check to see if there is a user already logged in, if so redirect them
 			
 			if (!empty($_SESSION['email'])) {
-				// redirect the user to the Home page
+				// redirect the user to the Welcome page
 				header("Location: Welcome.php");
 			}
 		?>

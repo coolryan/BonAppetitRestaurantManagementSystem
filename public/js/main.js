@@ -1,6 +1,9 @@
+// This script provides a ReactJS menu ordering component
 class MenuList extends React.Component {
+    // This is the table that shows the menu items and the order details
     constructor(props) {
         super(props);
+        // Set up state to be tracked for the component
         this.state = {
             menuItems: [],
             priceLookup: {},
@@ -14,6 +17,7 @@ class MenuList extends React.Component {
             user: null,
             submitted: false
         }
+        // Wire up methods so they have context when called
         this.updateOrder = this.updateOrder.bind(this);
         this.updateInStore = this.updateInStore.bind(this);
         this.updateTip = this.updateTip.bind(this);
@@ -22,8 +26,9 @@ class MenuList extends React.Component {
         this.updateServer = this.updateServer.bind(this);
     };
     
-
+    // This method will pull data in once only when the page loads
     componentDidMount() {
+        // Fetch the menu
         fetch("/api/menu.php").then((response) => {
             // Login was successful
             if (response.ok) {
@@ -39,6 +44,7 @@ class MenuList extends React.Component {
             this.setState({ menuItems: data });
         });
 
+        // Fetch some user information
         fetch("/api/info.php").then((response) => {
             // Login was successful
             if (response.ok) {
@@ -54,12 +60,12 @@ class MenuList extends React.Component {
         });
     }
 
+    // Create the order in the BE
     submitOrder() {
         if(!this.state.order) {
-            console.log("Empty order");
             return;
         }
-        console.log("Submitting order");
+        // Arrange the order as expected by the BE API
         let orderItems = [];
         for(const [menuItemId, instructionList] of Object.entries(this.state.order)) {
             const menuItemOrderList = instructionList.map(orderInstruction => {
@@ -82,15 +88,16 @@ class MenuList extends React.Component {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data)
         };
+        // Submit the order and update the state
         fetch("/api/menuorder.php", requestOptions).then(
             response => response.json()
         ).then(jsonResult => {
-            console.log("Got result from posting");
             this.setState({"submitted": true});
             this.setState({"orderId": jsonResult["orderId"]});
         });
     }
 
+    // Handler to update the in_store state variable
     updateInStore(event) {
         const inStore = event.target.checked;
         if(inStore) {
@@ -99,21 +106,25 @@ class MenuList extends React.Component {
         this.setState({inStore: inStore});
     }
 
+    // Handler to update the tip state variable
     updateTip(event) {
         const tip = parseFloat(event.target.value);
         this.setState({tip: tip});
     }
 
+    // Handler to update the restaurant table state variable
     updateTable(event) {
         const tableId = parseInt(event.target.value);
         this.setState({tableId: tableId})
     }
 
+    // Handler to update the server state variable
     updateServer(event) {
         const serverId = parseInt(event.target.value);
         this.setState({serverId: serverId})
     }
 
+    // Handler to update the order with all its items
     updateOrder(menuItemId, instructionList) {
         console.log("Updating order");
         const itemPrice = this.state.priceLookup[menuItemId];
@@ -123,6 +134,7 @@ class MenuList extends React.Component {
         this.setState({order: order});
     }
 
+    // Get the order subtototal
     getOrderSubTotal() {
         let orderTotal = 0.0;
         for(const [menuItemId, instructionList] of Object.entries(this.state.order)) {
@@ -131,11 +143,13 @@ class MenuList extends React.Component {
         return orderTotal;
     }
 
+    // Get the order tax
     getTax(orderTotal) {
         const tax = Math.round(.0875 * orderTotal * 100)/100;
         return tax;
     }
 
+    // Get the total for the order, including tax and tip
     getOrderTotal() {
         const orderTotal = this.getOrderSubTotal();
         const tax = this.getTax(orderTotal);
@@ -143,6 +157,7 @@ class MenuList extends React.Component {
         return orderTotal + tax + tip;
     }
 
+    // Display the menu item
     render() {
         let orderTotal = this.getOrderSubTotal();
 
@@ -175,6 +190,8 @@ class MenuList extends React.Component {
         const grandTotal = this.getOrderTotal();
         let tableHtml = null;
         let serverHtml = null;
+
+        // If in store, show the table and server inputs
         if(this.state.inStore) {
             tableHtml = (
                 <div className="orderInfo">
@@ -220,17 +237,17 @@ class MenuList extends React.Component {
                         <div id="submitOrder" onClick={this.submitOrder}>Submit Order</div>
                     </div>
                 </div>
-
-                
                 <div id="menu" class="orderMenu" >{categories}</div>
             </div>
         );
     }
 }
 
+// This class shows a single menu item
 class MenuItem extends React.Component {
     constructor(props) {
         super(props);
+        // Set the state for the component
         this.state = {
             menuItemId: this.props.menuItemId,
             name :this.props.name,
@@ -239,14 +256,15 @@ class MenuItem extends React.Component {
             orderInstructions: this.props.orderInstructions
         }
     }
+    // Call the parent menulist to add this menu item to the order list
     addOrder() {
-        console.log("You clicked the button");
         let orderInstructions = [...this.state.orderInstructions];
         orderInstructions.push("");
         this.props.onChange(this.state.menuItemId, orderInstructions);
         this.setState({orderInstructions: orderInstructions});
     }
 
+    // Update the instructions for the menu item state
     updateInstruction(event) {
         console.log("Updating instruction");
         let orderInstructions = [...this.state.orderInstructions];
@@ -257,6 +275,7 @@ class MenuItem extends React.Component {
         this.setState({orderInstructions: orderInstructions});
     }
 
+    // Display the menu item
     render () {
         var orderInstructionHtml = this.state.orderInstructions.map((instruction, index) => {
             const inputId = "instruction_" + index;
@@ -282,6 +301,7 @@ class MenuItem extends React.Component {
 
 }
 
+// This just encapsulates the order menu list
 function Body() {
     return (
       <main>
@@ -291,7 +311,7 @@ function Body() {
     );
 }
 
-
+// This is the parent component for the menu list
 function App() {
     return (
       <div>
@@ -299,4 +319,5 @@ function App() {
       </div>
     );
 }
+// Add the rendered javascript to the root element
 ReactDOM.render(<App />, document.getElementById('root'));

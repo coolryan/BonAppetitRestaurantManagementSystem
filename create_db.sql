@@ -3,7 +3,7 @@
 -- BCS 350- Web Database Developement
 -- Professor Kaplan
 -- Date: Novermber 26, 2022
--- Purpose: To create databases and tables;
+-- Purpose: To create databases and tables
 
 CREATE DATABASE IF NOT EXISTS bonappetit;
 USE bonappetit;
@@ -27,10 +27,12 @@ CREATE TABLE IF NOT EXISTS user (
 	FOREIGN KEY (user_type) REFERENCES user_type(id)
 );
 
+-- Categories to separate menu items
 CREATE TABLE IF NOT EXISTS menu_category (
 	name varchar(50) NOT NULL PRIMARY KEY
 );
 
+-- Items available on the meu
 CREATE TABLE IF NOT EXISTS menu_item (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name varchar(30) NOT NULL,
@@ -64,6 +66,7 @@ CREATE TABLE IF NOT EXISTS restaurant (
 	back_story varchar(1500) NOT NULL
 );
 
+-- Tables available at restaurants
 CREATE TABLE IF NOT EXISTS restaurant_table (
 	restaurant_table_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	table_number INT NOT NULL,
@@ -73,6 +76,7 @@ CREATE TABLE IF NOT EXISTS restaurant_table (
 	FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
 );
 
+-- Reservations for eating at the restaurant
 CREATE TABLE IF NOT EXISTS reservation_table (
 	reservation_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	party_size INT NOT NULL,
@@ -104,6 +108,7 @@ CREATE TABLE IF NOT EXISTS meal_order (
 	FOREIGN KEY (restaurant_table_id) REFERENCES restaurant_table(restaurant_table_id)
 );
 
+-- Specific items related to an order
 CREATE TABLE IF NOT EXISTS meal_order_menu_item (
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	meal_order_id INT NOT NULL,
