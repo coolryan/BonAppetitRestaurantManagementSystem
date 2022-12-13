@@ -5,6 +5,9 @@
 // Professor Kaplan
 // Date: December 9, 2022
 // Purpose: Handle menu API endpoints
+require_once("utils.php");
+checkAndStartSession();
+
 namespace api\Controller;
 use dao\MenuDAO;
 require($_SERVER['DOCUMENT_ROOT']."/DAO/menu.php");

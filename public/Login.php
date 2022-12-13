@@ -41,7 +41,6 @@ Purpose: To allow the owner of restaurant "Bon Appetit Paris" to login without h
 				if ($email != "" && $passwd != "") {
 					// query the database to see if the email exists
 					$query = "SELECT u.*, ut.name as user_type_name FROM user u left join user_type ut on u.user_type=ut.id WHERE email='{$email}'";
-					echo $query;
 					$result = mysqli_query($conn, $query);
 					if (mysqli_num_rows($result) == 1) {
 						// get the record from the query

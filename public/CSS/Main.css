@@ -157,7 +157,70 @@ div.actionbtn a {
 .menuItemName {
 	display: inline-block;
 }
+
+/* CSS for ordering  */
+.orderMenu .menucategory:nth-child(odd) .menuItem {
+	border: 1px solid lightgreen;
+}
+
+.orderMenu .menucategory:nth-child(even) .menuItem {
+	border: 1px solid whitesmoke;
+}
+
+.orderMenu .menuItem {
+	text-align: center;
+	border-radius: 8px;
+	padding: 5px;
+	width: 60%;
+	display: inline-block;
+	margin: 20px;
+	height: 30%;
+}
+
 .addOrderButton {
 	float: none;
 	display: inline-block;
+}
+
+.orderInfo label {
+	display: inline-block;
+	margin-right: 10px;
+}
+.orderInfo input {
+	display: inline-block;
+	width: 50px;
+}
+
+.orderInfo label, input, div {
+	margin-bottom: 2px;
+}
+
+#orderTotalInfo {
+	display: inline-block;
+	text-align: center;
+	width: 25%;
+	background-color: white;
+	border-radius: 8px;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid palegreen;
+}
+
+#orderTotalInfo .orderInfo {
+	text-align: center;
+}
+
+#submitOrder {
+	display: inline-block;
+	text-align: center;
+	border-radius: 8px;
+	padding: 3px;
+	width: 50%;
+	background-color: yellow;
+	color: black;
+}
+
+#submitOrder:hover {
+	background-color: yellowgreen;
+	cursor: pointer;
 }

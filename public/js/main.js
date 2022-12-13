@@ -8,12 +8,16 @@ class MenuList extends React.Component {
             order: {},
             orderId: null,
             inStore: true,
-            tip: 0.0
+            tip: 0.0,
+            tableId: null,
+            serverId: null
         }
         this.updateOrder = this.updateOrder.bind(this);
         this.updateInStore = this.updateInStore.bind(this);
         this.updateTip = this.updateTip.bind(this);
-        
+        this.submitOrder = this.submitOrder.bind(this);
+        this.updateTable = this.updateTable.bind(this);
+        this.updateServer = this.updateServer.bind(this);
     };
     
 
@@ -34,14 +38,62 @@ class MenuList extends React.Component {
         });
     }
 
+    submitOrder() {
+        if(!this.state.order) {
+            console.log("Empty order");
+            return;
+        }
+        console.log("Submitting order");
+        let orderItems = [];
+        for(const [menuItemId, instructionList] of Object.entries(this.state.order)) {
+            const menuItemOrderList = instructionList.map(orderInstruction => {
+                return {"menu_item_id": menuItemId, "instructions":  orderInstruction};
+            });
+            orderItems.push(menuItemOrderList);
+        }
+        
+        let data = {
+            "tip": this.state.tip,
+            "items": orderItems,
+            "in_store": this.state.inStore
+        }
+        if(this.state.inStore) {
+            data["restaurant_table_id"] = this.state.tableId;
+            data["server_id"] = this.state.serverId;
+        }
+        const requestOptions = {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
+        };
+        fetch("/api/menuorder.php", requestOptions).then(
+            response => response.json()
+        ).then(jsonResult => {
+            console.log("Got result from posting");
+        });
+    }
+
     updateInStore(event) {
         const inStore = event.target.checked;
+        if(inStore) {
+
+        }
         this.setState({inStore: inStore});
     }
 
     updateTip(event) {
-        const tip = event.target.value;
+        const tip = parseFloat(event.target.value);
         this.setState({tip: tip});
+    }
+
+    updateTable(event) {
+        const tableId = parseInt(event.target.value);
+        this.setState({tableId: tableId})
+    }
+
+    updateServer(event) {
+        const serverId = parseInt(event.target.value);
+        this.setState({serverId: serverId})
     }
 
     updateOrder(menuItemId, instructionList) {
@@ -53,11 +105,28 @@ class MenuList extends React.Component {
         this.setState({order: order});
     }
 
-    render() {
+    getOrderSubTotal() {
         let orderTotal = 0.0;
         for(const [menuItemId, instructionList] of Object.entries(this.state.order)) {
             orderTotal += this.state.priceLookup[menuItemId] * instructionList.length;
         }
+        return orderTotal;
+    }
+
+    getTax(orderTotal) {
+        const tax = Math.round(.0875 * orderTotal * 100)/100;
+        return tax;
+    }
+
+    getOrderTotal() {
+        const orderTotal = this.getOrderSubTotal();
+        const tax = this.getTax(orderTotal);
+        const tip = this.state.tip;
+        return orderTotal + tax + tip;
+    }
+
+    render() {
+        let orderTotal = this.getOrderSubTotal();
 
         let menuByCat = {};
         this.state.menuItems.forEach(menuItem => {
@@ -84,15 +153,48 @@ class MenuList extends React.Component {
                 <div className="menucategory"><div className='categoryheading'><h4>{key}</h4></div>{menuItemHtml}</div>
             );
         });
+        const tax = this.getTax(orderTotal);
+        const grandTotal = this.getOrderTotal();
+        let tableHtml = null;
+        let serverHtml = null;
+        if(this.state.inStore) {
+            tableHtml = (
+                <div className="orderInfo">
+                    <label for="tableId">Table Id:</label>
+                    <input id="tableId" name="tableId" type="number" min="1" step="1" value={this.state.tableId} onChange={this.updateTable} />
+                </div>
+            );
+            serverHtml = (
+                <div className="orderInfo">
+                    <label for="serverId">Server Id:</label>
+                    <input id="serverId" name="serverId" type="number" min="1" step="1" value={this.state.serverId} onChange={this.updateServer} />
+                </div>
+            );
+        }
 
         return (
             <div>
-                <div id="orderTotal">Sub Total: ${orderTotal}</div>
-                <label for="tip">Tip</label>
-                <input id="tipInput" name="tip" type="number" min="0.00" step="0.01" value={this.state.tip} onChange={this.updateTip} />
-                <label for="inStoreCheckbox">In Store</label>
-                <input name="inStoreCheckbox" id="inStoreCheckbox" type="checkbox" checked={this.state.inStore} onChange={this.updateInStore} />
-                <div id="menu">{categories}</div>
+                <div id="orderTotalInfo">
+                    <div id="orderTotal" className="orderInfo">Sub Total: ${orderTotal}</div>
+                    <div id="taxTotal" className="orderInfo">Tax: ${tax}</div>
+                    <div className="orderInfo">
+                        <label for="tip">Tip:</label>
+                        <input id="tipInput" name="tip" type="number" min="0.00" step="0.01" value={this.state.tip} onChange={this.updateTip} />
+                    </div>
+                    <div id="grandTotal" className="orderInfo">Grand Total: ${grandTotal}</div>
+                    <div className="orderInfo">
+                        <label for="inStoreCheckbox" >In Store</label>
+                        <input name="inStoreCheckbox" id="inStoreCheckbox" type="checkbox" checked={this.state.inStore} onChange={this.updateInStore} />
+                    </div>
+                    {tableHtml}
+                    {serverHtml}
+                    <div className="orderInfo">
+                        <div id="submitOrder" onClick={this.submitOrder}>Submit Order</div>
+                    </div>
+                </div>
+
+                
+                <div id="menu" class="orderMenu" >{categories}</div>
             </div>
         );
     }
@@ -141,10 +243,10 @@ class MenuItem extends React.Component {
             <div className="menuItem">
                 <div className = "itemNameAndOrderButton">
                     <div className="menuItemName">{this.state.name}</div>
-                    <button className="addOrderButton" onClick={this.addOrder.bind(this)}>Add to order</button>
                 </div>
                 <div className="menuItemPrice">{this.state.price}</div>
                 <div className="menuItemDescription">{this.state.description}</div>
+                <button className="addOrderButton" onClick={this.addOrder.bind(this)}>Add to order</button>
                 {orderInstructionHtml}
             </div>
         );
@@ -155,24 +257,12 @@ class MenuItem extends React.Component {
 function Body() {
     return (
       <main>
-        <div id="content">
           <h1>Order from our menu</h1>
-          <p>Select your order.</p>
           <MenuList />
-        </div>
       </main>
     );
 }
 
-// function MenuItem(menuItem) {
-//     return (
-//         <div className="menuItem">
-//             <div className="menuItemName">menuItem.name</div>
-//             <div className="menuItemPrice">menuItem.price</div>
-//             <div className="menuItemDescription">menuItem.description</div>
-//         </div>
-//     );
-// }
 
 function App() {
     return (

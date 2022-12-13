@@ -7,11 +7,8 @@ Date: November 26, 2022
 Purpose: These are the function helpers 
 -->
 <?php
-	function test() {
-		return "The text is from the test";
-	}
 	function checkAndStartSession() {
-		if(session_status() === PHP_SESSION_NONE)
+		if((empty(session_id()) && !headers_sent()) || session_status() === PHP_SESSION_NONE)
 			session_start();
 	}
 	function isLoggedIn() {
